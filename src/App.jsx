@@ -15,7 +15,7 @@ import AdminLayout from './Pages/AdminLayout.jsx'
 import AllBlog from './Pages/admin/AllBlog.jsx'
 import NewService from './Pages/admin/NewService.jsx'
 
-export const backendurl = "http://localhost:5000";
+export const backendurl = import.meta.env.BACKEND_URL;
 
 const App = () => {
   return (
