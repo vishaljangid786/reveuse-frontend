@@ -87,7 +87,7 @@ const Navbar = () => {
               to="/admin/createblog"
               className="relative inline-block text-lg font-semibold text-gray-800 hover:text-blue-600 transition-all duration-300">
               <span className="relative z-10">
-                <i class="fa-solid fa-user"></i>
+                <i className="fa-solid fa-user"></i>
               </span>
               <span className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-100 transition duration-300 rounded-lg"></span>
               <span className="absolute bottom-0 left-0 w-full h-[2px] bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
@@ -140,7 +140,7 @@ const Navbar = () => {
           {hasToken && (
             <Link to="/admin">
               <li className="flex bg-transparent w-fit mx-auto text-blue-500 border-2 border-blue-500 hover:bg-blue-500 hover:text-white rounded px-10 items-center gap-3 py-2  transition-all duration-300 cursor-pointer">
-                <i class="fa-solid fa-user"></i>
+                <i className="fa-solid fa-user"></i>
                 Admin
               </li>
             </Link>

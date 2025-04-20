@@ -14,8 +14,6 @@ const BlogDetails = () => {
   const [commentImage, setCommentImage] = useState(null);
   const [hasLiked, setHasLiked] = useState(false);
 
-  // State to toggle comments visibility
-  const [showComments, setShowComments] = useState(false);
 
   const fetchBlog = async () => {
     try {
@@ -101,20 +99,19 @@ const BlogDetails = () => {
     setCommentText((prev) => prev + emojiData.emoji);
   };
 
-  // Toggle comments visibility
-  const toggleComments = () => {
-    setShowComments(!showComments);
-  };
-
   if (!blog) return <p className="text-center mt-10">Loading blog...</p>;
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10 space-y-6">
       {blog.imageUrl && (
         <img
-          src={`${backendurl}${blog.imageUrl}`}
+          src={
+            blog.imageUrl.startsWith("http")
+              ? blog.imageUrl
+              : `${backendurl}${blog.imageUrl}`
+          }
           alt={blog.title}
-          className="w-full h-64 object-cover rounded-lg"
+          className="w-full object-cover rounded-lg"
         />
       )}
       <h1 className="text-4xl font-extrabold text-gradient bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -145,7 +142,6 @@ const BlogDetails = () => {
 
         {/* Toggle Comments */}
         <button
-          onClick={toggleComments}
           className="flex items-center gap-2 text-gray-600 cursor-pointer">
           <i className="fa-regular fa-comment text-lg"></i>
           <span>{blog.comments?.length || 0} Comments</span>
@@ -163,7 +159,7 @@ const BlogDetails = () => {
         <h2 className="text-2xl font-semibold mb-4">Leave a comment</h2>
         <form onSubmit={handleCommentSubmit} className="space-y-4">
           <textarea
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
+            className="w-full p-3 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
             rows={3}
             placeholder="Write something awesome..."
             value={commentText}
@@ -220,14 +216,13 @@ const BlogDetails = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-300 shadow-md hover:shadow-lg">
+            className="bg-blue-600 hover:text-blue-600  border-2 cursor-pointer border-blue-500 hover:bg-transparent  text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-300 shadow-md hover:shadow-lg">
             💬 Post Comment
           </button>
         </form>
       </div>
 
       {/* Conditional Rendering of Comments */}
-      {showComments && (
         <div className="bg-white p-6 rounded-xl shadow-md space-y-5">
           <h2 className="text-2xl font-semibold">Comments</h2>
           {blog.comments
@@ -241,13 +236,13 @@ const BlogDetails = () => {
                 )}
                 {comment.imageUrl && (
                   <img
-                    src={`${backendurl}${comment.imageUrl}`}
+                    src={`${comment.imageUrl}`}
                     alt="Comment"
                     className="w-32 h-auto rounded-md mb-2"
                   />
                 )}
                 <div className="text-sm text-gray-500 italic">
-                  — {comment.userName || "User"} •{" "}
+                  — 
                   {formatDistanceToNow(new Date(comment.createdAt), {
                     addSuffix: true,
                   })}
@@ -255,7 +250,6 @@ const BlogDetails = () => {
               </div>
             ))}
         </div>
-      )}
     </div>
   );
 };

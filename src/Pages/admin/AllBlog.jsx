@@ -34,6 +34,23 @@ const AllBlog = () => {
     setIsModalOpen(true);
   };
 
+  const handleDeleteClick = (blog) => {
+    // Confirm delete action
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this blog?"
+    );
+    if (confirmed) {
+      axios
+        .delete(`${backendurl}/api/blogs/${blog._id}`)
+        .then(() => {
+          fetchBlogs(); // Refresh the list of blogs after deletion
+        })
+        .catch((err) => {
+          console.error("Delete error:", err);
+        });
+    }
+  };
+
   const handleUpdate = () => {
     if (!selectedBlog) return;
 
@@ -62,7 +79,6 @@ const AllBlog = () => {
       });
   };
 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -80,7 +96,11 @@ const AllBlog = () => {
               className="bg-white shadow-md rounded-xl p-5 space-y-3">
               {blog.imageUrl && (
                 <img
-                  src={`${backendurl}${blog.imageUrl}`}
+                  src={
+                    blog.imageUrl.startsWith("http")
+                      ? blog.imageUrl
+                      : `${backendurl}${blog.imageUrl}`
+                  }
                   alt={blog.title}
                   className="w-full h-48 object-cover rounded-md"
                 />
@@ -97,11 +117,18 @@ const AllBlog = () => {
                 <span>📅 {new Date(blog.createdAt).toLocaleDateString()}</span>
               </div>
 
-              <button
-                className="text-green-600 hover:underline cursor-pointer"
-                onClick={() => handleEditClick(blog)}>
-                Edit
-              </button>
+              <div className="flex gap-2">
+                <button
+                  className="text-green-600 hover:underline cursor-pointer"
+                  onClick={() => handleEditClick(blog)}>
+                  Edit
+                </button>
+                <button
+                  className="text-red-600 hover:underline cursor-pointer"
+                  onClick={() => handleDeleteClick(blog)}>
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>
