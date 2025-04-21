@@ -1,27 +1,102 @@
-import React from "react";
-import { Link } from "react-router-dom"; // Importing Link for routing
+import React, { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
+import bgPattern from "../assets/home-slider3.jpg"; // Use a pattern or gradient background
 
 const HomeContact = () => {
+  const form = useRef();
+  const [submitted, setSubmitted] = useState(false);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "your_service_id", // replace with actual ID
+        "your_template_id", // replace with actual template ID
+        form.current,
+        "your_public_key" // replace with actual public key
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          setSubmitted(true);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
+
   return (
-    <div className="bg-gray-100 sm:rounded-t-[50px] rounded-t-[20px] py-16 px-6">
-      <div className="max-w-4xl mx-auto text-center">
-        {/* Heading with animation */}
-        <h2 className="text-4xl font-semibold text-gray-800 mb-4 animate__animated animate__fadeIn animate__delay-1s">
-          Got Questions? We're Here to Help!
-        </h2>
+    <div
+      className="min-h-screen flex items-center justify-center px-6 py-16 bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100"
+      style={{
+        backgroundImage: `url(${bgPattern})`,
+        backgroundSize: "cover",
+        backgroundBlendMode: "overlay",
+      }}>
+      <div className="bg-white/60 backdrop-blur-md shadow-2xl rounded-3xl max-w-5xl w-full p-8 md:p-14 flex flex-col md:flex-row gap-10 border border-gray-300">
+        {/* Left Section */}
+        <div className="md:w-1/2 space-y-6 flex flex-col justify-center">
+          <h2 className="text-4xl font-bold text-gray-800">Let's Talk!</h2>
+          <p className="text-gray-600 text-lg">
+            Have a project or just want to connect? Fill out the form and we’ll
+            be in touch soon.
+          </p>
+          <ul className="text-gray-700 space-y-2 text-sm">
+            <li>📞 +91-1234567890</li>
+            <li>📧 hello@example.com</li>
+            <li>🏢 New Delhi, India</li>
+          </ul>
+        </div>
 
-        {/* Description text */}
-        <p className="text-lg text-gray-600 mb-8 max-w-xl mx-auto">
-          Whether you need assistance or just want to learn more, we’re happy to
-          help. Reach out, and we'll guide you every step of the way.
-        </p>
-
-        {/* Contact Button */}
-        <Link
-          to="/contact" // Link to the contact page
-          className="inline-block px-8 py-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-semibold text-xl rounded-full shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:opacity-80">
-          Contact Us
-        </Link>
+        {/* Right Section - Form */}
+        <div className="md:w-1/2">
+          <form ref={form} onSubmit={sendEmail} className="space-y-4">
+            <input
+              type="text"
+              name="user_name"
+              placeholder="Your Name"
+              required
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+            <input
+              type="text"
+              name="company"
+              placeholder="Company Name"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Phone Number"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+            <input
+              type="email"
+              name="user_email"
+              placeholder="Your Email"
+              required
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+            <textarea
+              name="message"
+              rows="4"
+              placeholder="Your Message"
+              required
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-bold py-3 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+              Send Message
+            </button>
+            {submitted && (
+              <p className="text-green-600 text-sm mt-2">
+                Message sent successfully!
+              </p>
+            )}
+          </form>
+        </div>
       </div>
     </div>
   );

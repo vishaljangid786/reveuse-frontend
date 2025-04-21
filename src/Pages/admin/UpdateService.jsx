@@ -1,16 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { backendurl } from "../../App";
-import Heading from "../../components/Heading";
 
-const NewService = () => {
+const UpdateService = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     image: null,
   });
+  const [currentImage, setCurrentImage] = useState("");
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const fetchService = async () => {
+      try {
+        const response = await fetch(`${backendurl}/api/services/${id}`);
+        if (!response.ok) throw new Error("Failed to fetch service");
+
+        const service = await response.json();
+        setFormData({
+          title: service.title,
+          description: service.description,
+          image: null,
+        });
+        setCurrentImage(service.imageUrl);
+      } catch (error) {
+        setMessage("Error loading service. Please try again.");
+        console.error("Error fetching service:", error);
+      }
+    };
+
+    fetchService();
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -32,33 +57,30 @@ const NewService = () => {
     data.append("title", formData.title);
     data.append("description", formData.description);
 
-    // Ensure the file is attached correctly
+    // Only append image if a new one is selected
     if (formData.image) {
       data.append("image", formData.image);
-    } else {
-      setMessage("Please upload an image.");
-      setLoading(false);
-      return;
     }
 
     try {
-      const response = await fetch(`${backendurl}/api/services`, {
-        method: "POST",
+      const response = await fetch(`${backendurl}/api/services/${id}`, {
+        method: "PUT",
         body: data,
       });
 
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || "Failed to create service");
+        throw new Error(result.error || "Failed to update service");
       }
 
-      setMessage("Service created successfully!");
-      setFormData({ title: "", description: "", image: null });
-      setPreview(null);
+      setMessage("Service updated successfully!");
+      setTimeout(() => {
+        navigate("/admin/services");
+      }, 1500);
     } catch (error) {
-      setMessage(error.message || "Error creating service. Please try again.");
-      console.error("Error creating service:", error);
+      setMessage(error.message || "Error updating service. Please try again.");
+      console.error("Error updating service:", error);
     } finally {
       setLoading(false);
     }
@@ -66,9 +88,7 @@ const NewService = () => {
 
   return (
     <div className="max-w-xl mx-auto p-6 bg-white shadow-2xl rounded-2xl mt-10">
-      <h2 className="text-2xl font-bold mb-4 text-center">
-        <Heading text1={"Create"} text2="New Service" />
-      </h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Update Service</h2>
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
           <label className="block text-sm font-medium text-gray-700">
@@ -100,10 +120,23 @@ const NewService = () => {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Image
+            Current Image
+          </label>
+          {currentImage && (
+            <img
+              src={currentImage}
+              alt="Current Service"
+              className="mt-2 rounded-lg w-full h-48 object-cover"
+            />
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            New Image (Optional)
           </label>
           <label className="inline-block bg-gray-200 text-gray-800 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 transition duration-200">
-            Choose File
+            Choose New File
             <input
               type="file"
               name="image"
@@ -126,7 +159,7 @@ const NewService = () => {
           disabled={loading}
           className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
         >
-          {loading ? "Creating..." : "Create Service"}
+          {loading ? "Updating..." : "Update Service"}
         </button>
       </form>
       {message && (
@@ -136,4 +169,4 @@ const NewService = () => {
   );
 };
 
-export default NewService;
+export default UpdateService;

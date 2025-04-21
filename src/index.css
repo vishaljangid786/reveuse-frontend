@@ -30,3 +30,7 @@ html,body{
 .blog-slider__pagination .swiper-pagination-bullet-active {
   background-color: #2563eb; /* Tailwind's blue-600 */
 }
+
+button{
+  cursor: pointer;
+}

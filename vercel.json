@@ -5,24 +5,36 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "dist",
+        "buildCommand": "npm run build"
       }
     }
   ],
   "routes": [
     {
       "src": "/assets/(.*)",
+      "dest": "/assets/$1",
       "headers": {
         "Content-Type": "text/javascript"
-      },
-      "continue": true
+      }
     },
     {
       "src": "/(.*\\.js)",
+      "dest": "/$1",
       "headers": {
         "Content-Type": "text/javascript"
-      },
-      "continue": true
+      }
+    },
+    {
+      "src": "/(.*\\.css)",
+      "dest": "/$1",
+      "headers": {
+        "Content-Type": "text/css"
+      }
+    },
+    {
+      "src": "/(.*\\.(png|jpg|jpeg|gif|svg|ico))",
+      "dest": "/$1"
     },
     {
       "src": "/(.*)",

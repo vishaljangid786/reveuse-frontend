@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
 import { backendurl } from "../App";
+import Heading from "../components/Heading";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate(); // Hook to navigate programmatically
 
   // Function to check if the user is logged in (assuming token in localStorage)
@@ -21,13 +23,26 @@ const Blog = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+  const filteredBlogs = blogs.filter(
+    (blog) =>
+      blog.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="max-w-5xl min-h-screen mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold mb-6 text-center">All Blogs</h1>
-      {blogs.length > 0 ? (
+      <Heading text1={"All"} text2={"Blogs"} />
+      <div className="mb-6 flex justify-end">
+        <input
+          type="text"
+          placeholder="Search blogs..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full sm:w-72  px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      {filteredBlogs.length > 0 ? (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {blogs.map((blog) => (
+          {filteredBlogs.map((blog) => (
             <div
               key={blog._id}
               className="bg-white shadow-md rounded-xl p-5 space-y-3">

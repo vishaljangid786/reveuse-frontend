@@ -119,12 +119,12 @@ const AllBlog = () => {
 
               <div className="flex gap-2">
                 <button
-                  className="text-green-600 hover:underline cursor-pointer"
+                  className="text-white-600 hover:bg-transparent bg-yellow-400 border-2 border-yellow-400  text-white px-4 rounded hover:text-yellow-400 transition cursor-pointer"
                   onClick={() => handleEditClick(blog)}>
                   Edit
                 </button>
                 <button
-                  className="text-red-600 hover:underline cursor-pointer"
+                  className="bg-red-500 text-white border-2 border-red-500 hover:bg-transparent hover:text-red-500 rounded px-4 rounded cursor-pointer"
                   onClick={() => handleDeleteClick(blog)}>
                   Delete
                 </button>

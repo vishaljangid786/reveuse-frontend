@@ -16,8 +16,15 @@ export default defineConfig({
         assetFileNames: "assets/[name].[hash].[ext]",
       },
     },
+    sourcemap: true,
+    minify: "terser",
+    target: "esnext",
   },
   server: {
     port: 5173,
+  },
+  base: "/",
+  optimizeDeps: {
+    include: ["react", "react-dom", "react-router-dom"],
   },
 });
