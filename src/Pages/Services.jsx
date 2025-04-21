@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {backendurl} from '../App'
+import { backendurl } from "../App";
+import { useNavigate } from "react-router-dom";
+
 import Heading from "../components/Heading";
 
 const Services = () => {
@@ -8,6 +10,7 @@ const Services = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -24,9 +27,8 @@ const Services = () => {
     fetchServices();
   }, []);
 
-  const filteredServices = services.filter(
-    (service) =>
-      service.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredServices = services.filter((service) =>
+    service.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -53,14 +55,32 @@ const Services = () => {
               className="bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transition duration-300">
               {service.imageUrl && (
                 <img
-                  src={service.imageUrl}
+                  src={
+                    service.imageUrl.startsWith("http")
+                      ? service.imageUrl
+                      : `${backendurl}${service.imageUrl}`
+                  }
                   alt={service.title}
                   className="w-full h-48 object-cover"
                 />
               )}
               <div className="p-4">
                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                <p className="text-gray-600">{service.description}</p>
+                <p className="text-gray-600">
+                  {service.description.slice(0, 100)}...
+                </p>
+                <div className="mt-4 text-sm text-gray-500 flex justify-between">
+                  <span>👍 {service.likes || 0}</span>
+                  <span>💬 {service?.comments?.length || 0}</span>
+                  <span>
+                    📅 {new Date(service.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+                <button
+                  className="mt-2 text-blue-600 hover:underline"
+                  onClick={() => navigate(`/services/${service._id}`)}>
+                  Read more
+                </button>
               </div>
             </div>
           ))

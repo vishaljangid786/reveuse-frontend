@@ -14,6 +14,7 @@ import AllServices from "./Pages/admin/AllServices.jsx";
 import AdminLayout from "./Pages/AdminLayout.jsx";
 import AllBlog from "./Pages/admin/AllBlog.jsx";
 import NewService from "./Pages/admin/NewService.jsx";
+import ServiceDetails from "./Pages/ServiceDetails.jsx";
 
 // export const backendurl = "https://reveuse-backend.vercel.app" ;
 export const backendurl = "http://localhost:5000"; ;
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/login" element={<Login />} />
         <Route path="/blogs/:id" element={<BlogDetails />} />
+        <Route path="/services/:id" element={<ServiceDetails />} />
         {/* admin Routes */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="createblog" element={<BlogForm />} />
