@@ -87,7 +87,7 @@ const HomeContact = () => {
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-indigo-500 via-blue-500 to-pink-500 hover:to-indigo-500 hover:from-pink-500 duration-300 text-white font-bold py-3 rounded-lg shadow-md hover:shadow-xl transition duration-300 relative overflow-hidden group">
+              className="w-full bg-gradient-to-r from-indigo-500 via-blue-500 to-pink-500 hover:to-indigo-500 hover:from-pink-500  text-white font-bold py-3 rounded-lg shadow-md hover:shadow-xl transition duration-300 relative overflow-hidden group">
               <span className="relative z-10">Send Message</span>
               {/* Pulse effect on hover */}
               <span className="absolute inset-0 bg-white opacity-10 group-hover:animate-ping rounded-lg"></span>

@@ -124,7 +124,7 @@ const AllBlog = () => {
                   Edit
                 </button>
                 <button
-                  className="bg-red-500 text-white border-2 border-red-500 hover:bg-transparent hover:text-red-500 rounded px-4 rounded cursor-pointer"
+                  className="bg-red-500 text-white border-2 border-red-500 hover:bg-transparent hover:text-red-500 px-4 rounded cursor-pointer"
                   onClick={() => handleDeleteClick(blog)}>
                   Delete
                 </button>
