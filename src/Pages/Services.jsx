@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { backendurl } from "../App";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Heading from "../components/Heading";
 
@@ -50,9 +50,10 @@ const Services = () => {
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {filteredServices.length > 0 ? (
           filteredServices.map((service) => (
-            <div
+            <Link
+              to={`/services/${service._id}`}
               key={service._id}
-              className="bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transition duration-300">
+              className="bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl group">
               {service.imageUrl && (
                 <img
                   src={
@@ -64,25 +65,15 @@ const Services = () => {
                   className="w-full h-48 object-cover"
                 />
               )}
-              <div className="p-4">
-                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                <p className="text-gray-600">
-                  {service.description.slice(0, 100)}...
+              <div className="p-4 flex items-center justify-between">
+                <h3 className="text-xl font-semibold mb-2 text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
+                  {service.title}
+                </h3>
+                <p className=" group-hover:text-blue-600 transition-colors duration-300">
+                  →
                 </p>
-                <div className="mt-4 text-sm text-gray-500 flex justify-between">
-                  <span>👍 {service.likes || 0}</span>
-                  <span>💬 {service?.comments?.length || 0}</span>
-                  <span>
-                    📅 {new Date(service.createdAt).toLocaleDateString()}
-                  </span>
-                </div>
-                <button
-                  className="mt-2 text-blue-600 hover:underline"
-                  onClick={() => navigate(`/services/${service._id}`)}>
-                  Read more
-                </button>
               </div>
-            </div>
+            </Link>
           ))
         ) : (
           <p className="text-center w-full col-span-full">No services found.</p>

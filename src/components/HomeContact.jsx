@@ -29,7 +29,7 @@ const HomeContact = () => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center px-6 py-16 bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100"
+      className="min-h-screen flex items-center justify-center px-6 py-16 bg-gradient-to-r from-indigo-100 via-blue-100 to-pink-100"
       style={{
         backgroundImage: `url(${bgPattern})`,
         backgroundSize: "cover",
@@ -58,38 +58,41 @@ const HomeContact = () => {
               name="user_name"
               placeholder="Your Name"
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="text"
               name="company"
               placeholder="Company Name"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="tel"
               name="phone"
               placeholder="Phone Number"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="email"
               name="user_email"
               placeholder="Your Email"
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <textarea
               name="message"
               rows="4"
               placeholder="Your Message"
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-bold py-3 rounded-lg shadow-md hover:shadow-xl transition duration-300">
-              Send Message
+              className="w-full bg-gradient-to-r from-indigo-500 via-blue-500 to-pink-500 hover:to-indigo-500 hover:from-pink-500 duration-300 text-white font-bold py-3 rounded-lg shadow-md hover:shadow-xl transition duration-300 relative overflow-hidden group">
+              <span className="relative z-10">Send Message</span>
+              {/* Pulse effect on hover */}
+              <span className="absolute inset-0 bg-white opacity-10 group-hover:animate-ping rounded-lg"></span>
             </button>
+
             {submitted && (
               <p className="text-green-600 text-sm mt-2">
                 Message sent successfully!

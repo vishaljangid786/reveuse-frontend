@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer.jsx";
@@ -20,6 +20,22 @@ import ServiceDetails from "./Pages/ServiceDetails.jsx";
 export const backendurl = "http://localhost:5000"; ;
 
 const App = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsVisible(window.scrollY > 100); // Show after scrolling 100px
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -40,6 +56,13 @@ const App = () => {
           <Route path="allservices" element={<AllServices />} />
         </Route>
       </Routes>
+      {isVisible && (
+        <button
+          onClick={handleClick}
+          className="fixed bottom-5 right-5 bg-blue-600 text-white p-3 px-5 rounded-full shadow-lg hover:bg-transparent border-2 border-blue-500 transition hover:text-blue-500">
+          ↑
+        </button>
+      )}
       <Footer />
     </BrowserRouter>
   );
