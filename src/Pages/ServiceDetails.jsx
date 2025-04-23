@@ -10,6 +10,8 @@ const ServiceDetails = () => {
   const [service, setService] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [isImageOpen, setIsImageOpen] = useState(false);
+
 
   useEffect(() => {
     const fetchService = async () => {
@@ -41,15 +43,43 @@ const ServiceDetails = () => {
 
       <div className="bg-white shadow-md rounded-xl p-6 space-y-4">
         {service.imageUrl && (
-          <img
-            src={
-              service.imageUrl.startsWith("http")
-                ? service.imageUrl
-                : `${backendurl}${service.imageUrl}`
-            }
-            alt={service.title}
-            className="w-full h-64 object-cover rounded-md"
-          />
+          <div className="relative group">
+            <img
+              src={
+                service.imageUrl.startsWith("http")
+                  ? service.imageUrl
+                  : `${backendurl}${service.imageUrl}`
+              }
+              alt={service.title}
+              className="w-full h-64 object-cover rounded-md cursor-pointer"
+              onClick={() => setIsImageOpen(true)}
+            />
+            <button
+              onClick={() => setIsImageOpen(true)}
+              className="absolute bottom-2 right-2 bg-black/60 text-white px-3 py-1 text-sm rounded-md opacity-0 group-hover:opacity-100 transition">
+              <i class="fa-solid fa-expand"></i>
+            </button>
+          </div>
+        )}
+        {isImageOpen && (
+          <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center">
+            <div className="relative max-w-6xl w-full mx-4">
+              <img
+                src={
+                  service.imageUrl.startsWith("http")
+                    ? service.imageUrl
+                    : `${backendurl}${service.imageUrl}`
+                }
+                alt="Full screen"
+                className="w-full max-h-[90vh] object-contain rounded-lg"
+              />
+              <button
+                onClick={() => setIsImageOpen(false)}
+                className="absolute top-4 right-4 bg-white text-black px-2 py-1 rounded-full shadow-md hover:bg-red-600 hover:text-white transition">
+                ✕
+              </button>
+            </div>
+          </div>
         )}
 
         <h1 className="text-3xl font-bold text-gray-800">{service.title}</h1>

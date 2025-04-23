@@ -3,6 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { backendurl } from "../App";
 import Heading from "../components/Heading";
+import AOS from "aos";
+import "aos/dist/aos.css"; // AOS styles
+import Loader from "../components/Loader"; // ← Import the Loader component
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -21,6 +24,7 @@ const Blog = () => {
         console.log(err);
         setLoading(false);
       });
+    AOS.init({ duration: 1000, once: true });
   }, []);
 
   const filteredBlogs = blogs.filter((blog) =>
@@ -29,32 +33,30 @@ const Blog = () => {
 
   return (
     <div className="max-w-6xl min-h-screen mx-auto px-4 py-10">
-      <Heading text1="All" text2="Blogs" />
+      <div data-aos="zoom-in">
+        <Heading text1="All" text2="Blogs" />
+      </div>
 
       <div className="mb-8 flex justify-end">
         <input
           type="text"
           placeholder="Search blogs..."
           value={searchTerm}
+          data-aos="fade-left"
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full sm:w-72 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
 
       {loading ? (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {[...Array(6)].map((_, idx) => (
-            <div
-              key={idx}
-              className="bg-gray-200 animate-pulse rounded-xl h-64"></div>
-          ))}
-        </div>
+        <Loader /> // ← Show the loader while loading
       ) : filteredBlogs.length > 0 ? (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredBlogs.map((blog) => (
             <div
               key={blog._id}
-              className="bg-white shadow-md hover:shadow-xl transition-shadow transio duration-300 rounded-xl p-5 space-y-4 transform hover:scale-[1.05]  hover:border-blue-500 border border-transparent hover:border">
+              data-aos="fade-up"
+              className="bg-white shadow-md hover:shadow-xl transition-shadow transio duration-300 rounded-xl p-5 space-y-4 transform hover:scale-[1.05] hover:border-blue-500 border border-transparent hover:border">
               {blog.imageUrl && (
                 <img
                   src={

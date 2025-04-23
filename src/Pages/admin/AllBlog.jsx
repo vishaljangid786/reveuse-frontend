@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { backendurl } from "../../App";
 import Heading from "../../components/Heading";
+import Loader from "../../components/Loader";
 
 const AllBlog = () => {
   const [blogs, setBlogs] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBlog, setSelectedBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const [formData, setFormData] = useState({
     title: "",
     content: "",
@@ -18,11 +21,14 @@ const AllBlog = () => {
   }, []);
 
   const fetchBlogs = () => {
+    setLoading(true);
     axios
       .get(`${backendurl}/api/blogs`)
       .then((res) => setBlogs(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   };
+
 
   const handleEditClick = (blog) => {
     setSelectedBlog(blog);
@@ -88,7 +94,9 @@ const AllBlog = () => {
     <div className="max-w-5xl min-h-screen mx-auto px-4 py-10">
       <Heading text1={"All"} text2={"Blog"} />
 
-      {blogs.length > 0 ? (
+      {loading ? (
+        <Loader />
+      ) : blogs.length > 0 ? (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {blogs.map((blog) => (
             <div

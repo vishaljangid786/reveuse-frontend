@@ -8,6 +8,7 @@ import { imagesCompanies } from "../assets/assets";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { backendurl } from "../App";
+import Loader from "./Loader";
 
 const NextArrow = ({ onClick }) => (
   <div
@@ -27,8 +28,19 @@ const PrevArrow = ({ onClick }) => (
 
 const CompaniesOverview = () => {
   const [services, setServices] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true); // To stop if no more data
+
   const [error, setError] = useState("");
+  const handleSlideChange = (current) => {
+    // If user is on the last visible slide and more data is available
+    if (current >= services.length - 1 && hasMore && !loading) {
+      const nextPage = page + 1;
+      fetchServices(nextPage);
+      setPage(nextPage);
+    }
+  };
 
   const settings = {
     infinite: true,
@@ -42,6 +54,7 @@ const CompaniesOverview = () => {
     arrows: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    afterChange: handleSlideChange,
     cssEase: "ease-in-out",
     responsive: [
       {
@@ -53,20 +66,28 @@ const CompaniesOverview = () => {
       },
     ],
   };
-  useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const res = await axios.get(`${backendurl}/api/services`);
-        setServices(res.data);
-      } catch (err) {
-        setError(err.response?.data?.error || "Failed to fetch services");
-      } finally {
-        setLoading(false);
+  const fetchServices = async (pageNum = 1) => {
+    setLoading(true);
+    try {
+      const res = await axios.get(`${backendurl}/api/services?page=${pageNum}`);
+      if (res.data.length === 0) {
+        setHasMore(false);
+      } else {
+        setServices((prev) => [...prev, ...res.data]);
       }
-    };
+    } catch (err) {
+      console.error("Failed to fetch:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchServices();
+  useEffect(() => {
+    fetchServices(page);
   }, []);
+  
+
+
 
   return (
     <div>
@@ -75,7 +96,7 @@ const CompaniesOverview = () => {
         text2="Our Partners"
         toggle="company"
       />
-      {loading && <p className="text-center">Loading...</p>}
+      {loading && <Loader />}
       {error && <p className="text-center text-red-500">{error}</p>}
       <div className="relative max-w-6xl mx-auto px-4 py-12 mb-10 ">
         <Slider {...settings}>

@@ -59,10 +59,11 @@ const App = () => {
       {isVisible && (
         <button
           onClick={handleClick}
-          className="fixed bottom-5 right-5 bg-blue-600 text-white p-3 px-5 rounded-full shadow-lg hover:bg-transparent border-2 border-blue-500 transition hover:text-blue-500">
-          ↑
+          className="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg transform transition-all duration-300 ease-in-out hover:scale-110 hover:bg-blue-700 hover:rotate-45">
+          <i className="fas fa-arrow-up text-2xl"></i>
         </button>
       )}
+
       <Footer />
     </BrowserRouter>
   );

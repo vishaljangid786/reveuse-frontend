@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { backendurl } from "../../App";
 import Heading from "../../components/Heading";
+import Loader from "../../components/Loader";
 
 const AllServices = () => {
   const [services, setServices] = useState([]);
@@ -86,40 +87,44 @@ const AllServices = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <Heading text1={"All"} text2="Services" />
-      {loading && <p className="text-center">Loading...</p>}
       {error && <p className="text-center text-red-500">{error}</p>}
-
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map((service) => (
-          <div
-            key={service._id}
-            className="bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transition duration-300">
-            {service.imageUrl && (
-              <img
-                src={service.imageUrl}
-                alt={service.title}
-                className="w-full h-48 object-cover"
-              />
-            )}
-            <div className="p-4">
-              <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-              <p className="text-gray-600 mb-4">{service.description}</p>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => startEditing(service)}
-                  className="px-4 py-1 bg-yellow-400 rounded-md text-white border-2 border-yellow-400 hover:bg-transparent transition hover:text-yellow-400 text-sm">
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(service._id)}
-                  className="px-4 py-1 bg-red-500  text-white rounded-md hover:bg-transparent hover:text-red-500 border-2 border-red-500 transition text-sm">
-                  Delete
-                </button>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <p className="text-center text-red-500">{error}</p>
+      ) : (
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((service) => (
+            <div
+              key={service._id}
+              className="bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transition duration-300">
+              {service.imageUrl && (
+                <img
+                  src={service.imageUrl}
+                  alt={service.title}
+                  className="w-full h-48 object-cover"
+                />
+              )}
+              <div className="p-4">
+                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                <p className="text-gray-600 mb-4">{service.description}</p>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => startEditing(service)}
+                    className="px-4 py-1 bg-yellow-400 rounded-md text-white border-2 border-yellow-400 hover:bg-transparent transition hover:text-yellow-400 text-sm">
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(service._id)}
+                    className="px-4 py-1 bg-red-500 text-white rounded-md hover:bg-transparent hover:text-red-500 border-2 border-red-500 transition text-sm">
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {editingService && (
         <div className="fixed inset-0 bg-[#3535357d] flex items-center justify-center z-50">
