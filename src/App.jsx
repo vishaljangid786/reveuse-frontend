@@ -17,7 +17,7 @@ import NewService from "./Pages/admin/NewService.jsx";
 import ServiceDetails from "./Pages/ServiceDetails.jsx";
 
 // export const backendurl = "https://reveuse-backend.vercel.app" ;
-export const backendurl = "http://localhost:5000"; ;
+export const backendurl = "https://api.thereveuse.com";
 
 const App = () => {
   const [isVisible, setIsVisible] = useState(false);
