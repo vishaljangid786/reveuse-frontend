@@ -53,9 +53,9 @@ const Services = () => {
       </div>
 
       {loading && (
-        <p className="text-center">
+        <div className="text-center">
           <Loader />
-        </p>
+        </div>
       )}
       {error && <p className="text-center text-red-500">{error}</p>}
 
