@@ -23,7 +23,6 @@
     "emoji-picker-react": "^4.12.2",
     "framer-motion": "^12.7.2",
     "lucide-react": "^0.488.0",
-    "quill": "^2.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.5.0",

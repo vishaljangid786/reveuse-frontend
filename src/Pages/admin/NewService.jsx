@@ -11,15 +11,38 @@ const NewService = () => {
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [dragActive, setDragActive] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === "image") {
-      const file = files[0];
-      setFormData((prev) => ({ ...prev, image: file }));
-      setPreview(URL.createObjectURL(file));
+    if (name === "image" && files.length > 0) {
+      handleImage(files[0]);
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleImage = (file) => {
+    setFormData((prev) => ({ ...prev, image: file }));
+    setPreview(URL.createObjectURL(file));
+  };
+
+  const handleDrag = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setDragActive(true);
+    } else if (e.type === "dragleave") {
+      setDragActive(false);
+    }
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleImage(e.dataTransfer.files[0]);
     }
   };
 
@@ -32,7 +55,6 @@ const NewService = () => {
     data.append("title", formData.title);
     data.append("description", formData.description);
 
-    // Ensure the file is attached correctly
     if (formData.image) {
       data.append("image", formData.image);
     } else {
@@ -69,7 +91,13 @@ const NewService = () => {
       <h2 className="text-2xl font-bold mb-4 text-center">
         <Heading text1={"Create"} text2="New Service" />
       </h2>
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form
+        onSubmit={handleSubmit}
+        onDragEnter={handleDrag}
+        onDragOver={handleDrag}
+        onDragLeave={handleDrag}
+        onDrop={handleDrop}
+        className="space-y-5">
         <div>
           <label className="block text-sm font-medium text-gray-700">
             Title
@@ -102,16 +130,27 @@ const NewService = () => {
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Image
           </label>
-          <label className="inline-block bg-gray-200 text-gray-800 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 transition duration-200">
-            Choose File
-            <input
-              type="file"
-              name="image"
-              accept="image/*"
-              onChange={handleChange}
-              className="hidden"
-            />
-          </label>
+
+          <div
+            className={`w-full p-6 border-2 border-dashed rounded-lg text-center transition ${
+              dragActive ? "border-blue-600 bg-blue-50" : "border-gray-400"
+            }`}>
+            <p className="mb-2 text-gray-500">
+              Drag & drop an image here, or{" "}
+              <span className="text-blue-600 underline">browse</span>
+            </p>
+            <label className="inline-block bg-gray-200 text-gray-800 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 transition duration-200">
+              Choose File
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleChange}
+                className="hidden"
+              />
+            </label>
+          </div>
+
           {preview && (
             <img
               src={preview}
@@ -124,8 +163,7 @@ const NewService = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
-        >
+          className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300">
           {loading ? "Creating..." : "Create Service"}
         </button>
       </form>

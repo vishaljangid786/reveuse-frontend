@@ -166,7 +166,9 @@ const BlogDetails = () => {
       <h1 className="text-4xl font-extrabold text-gradient bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
         {blog.title}
       </h1>
-      <p className="text-lg text-gray-800">{blog.content}</p>
+      <p className="text-lg text-gray-800 whitespace-pre-line ">
+        {blog.content}
+      </p>
 
       <div className="text-gray-600 text-sm flex flex-wrap gap-6 items-center mt-2">
         {/* Date */}

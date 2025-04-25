@@ -83,7 +83,7 @@ const ServiceDetails = () => {
         )}
 
         <h1 className="text-3xl font-bold text-gray-800">{service.title}</h1>
-        <p className="text-gray-700 text-lg">{service.description}</p>
+        <p className="text-gray-700 text-lg whitespace-pre-line">{service.description}</p>
       </div>
     </div>
   );
