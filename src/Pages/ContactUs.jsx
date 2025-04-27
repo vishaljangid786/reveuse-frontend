@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import background from "../assets/home-slider1.jpg";
-import contactIllustration from "../assets/home-slider2.jpg";
+import Contact from "../assets/aeb332098d3a352c570beecb08b08d3f.png"; // Adjust the path as necessary
 
 const ContactUs = () => {
   const form = useRef();
@@ -30,18 +29,20 @@ const ContactUs = () => {
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center flex items-center justify-center px-6 py-12"
-      style={{ backgroundImage: `url(${background})` }}>
-      <div className="bg-white/30 rounded-3xl shadow-lg p-10 max-w-4xl w-full flex flex-col md:flex-row gap-10">
-        <div className="md:w-1/2 flex flex-col justify-center">
+      className="min-h-screen bg-cover   bg-no-repeat bg-center flex items-center justify-center px-6 py-12"
+      style={{
+        backgroundImage: `url(https://www.shutterstock.com/image-photo/contact-us-concept-hand-show-600nw-2503143861.jpg)`,
+      }}>
+      <div className="bg-white/30 rounded-3xl shadow-lg p-6 md:p-10 max-w-4xl w-full flex flex-col md:flex-row gap-10">
+        <div className="md:w-1/2 flex justify-center">
           <img
-            src={contactIllustration}
+            src={Contact}
             alt="Contact"
-            className="h-96 object-cover rounded"
+            className="h-full w-full object-cover rounded-md"
           />
         </div>
 
-        <div className="md:w-1/2">
+        <div className="md:w-1/2 flex flex-col justify-center">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">Contact Us</h2>
           <p className="text-gray-600 mb-6">
             We'd love to hear from you! Send us a message and we'll get back to

@@ -75,13 +75,22 @@ export default function Footer() {
             Follow Us
           </h3>
           <div className="flex justify-center sm:justify-start space-x-5 text-2xl mt-3">
-            <a href="#" aria-label="X" className="hover:text-blue-300">
+            <a
+              href="https://x.com/TheRevesuse"
+              aria-label="X"
+              className="hover:text-blue-300">
               <FontAwesomeIcon icon={faXTwitter} />
             </a>
-            <a href="#" aria-label="Instagram" className="hover:text-pink-400">
+            <a
+              href="https://www.instagram.com/"
+              aria-label="Instagram"
+              className="hover:text-pink-400">
               <FontAwesomeIcon icon={faInstagram} />
             </a>
-            <a href="#" aria-label="LinkedIn" className="hover:text-blue-500">
+            <a
+              href="https://www.linkedin.com/"
+              aria-label="LinkedIn"
+              className="hover:text-blue-500">
               <FontAwesomeIcon icon={faLinkedin} />
             </a>
           </div>
