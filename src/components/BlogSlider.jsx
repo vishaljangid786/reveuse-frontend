@@ -5,7 +5,38 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Link } from "react-router-dom";
 import Heading from "./Heading";
-import { steps } from "../assets/assets";
+const steps = [
+  {
+    icon: <i className="fas fa-globe text-blue-600 text-3xl"></i>,
+    step: "01",
+    title: "Make An Inquiry",
+    desc: "Reach out to us with your project idea or requirements to get started.",
+  },
+  {
+    icon: <i className="fas fa-comments text-blue-600 text-3xl"></i>,
+    step: "02",
+    title: "Discuss With The Manager",
+    desc: "Talk with our expert manager to understand your goals and suggest tailored strategies.",
+  },
+  {
+    icon: <i className="fas fa-users text-blue-600 text-3xl"></i>,
+    step: "03",
+    title: "Meet and Choose Your Team",
+    desc: "Select your dedicated team from a pool of experienced professionals ready to collaborate.",
+  },
+  {
+    icon: <i className="fas fa-file-signature text-blue-600 text-3xl"></i>,
+    step: "04",
+    title: "Sign the Contract",
+    desc: "Finalize agreements and timelines by signing a transparent and flexible contract.",
+  },
+  {
+    icon: <i className="fas fa-rocket text-blue-600 text-3xl"></i>,
+    step: "05",
+    title: "Work Together",
+    desc: "Begin the journey as we work hand-in-hand to bring your vision to life efficiently.",
+  },
+];
 
 
 

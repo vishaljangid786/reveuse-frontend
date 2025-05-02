@@ -6,6 +6,7 @@ import EmojiPicker from "emoji-picker-react";
 import { formatDistanceToNow } from "date-fns"; 
 import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
+import Seo from "../components/Seo";
 
 
 const BlogDetails = () => {
@@ -125,6 +126,14 @@ const BlogDetails = () => {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10 space-y-6">
+      <Seo
+        title={`${blog.title} – Reveuse Blog`}
+        description={blog.summary || blog.content.slice(0, 150)}
+        keywords={blog.tags.join(", ")}
+        url={`https://www.thereveuse.com/blogs/${blog._id}`}
+        image={blog.thumbnail}
+      />
+
       <button
         onClick={() => navigate(-1)}
         className="mb-4 text-blue-600 hover:underline">

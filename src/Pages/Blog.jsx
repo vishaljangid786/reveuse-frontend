@@ -6,6 +6,7 @@ import Heading from "../components/Heading";
 import AOS from "aos";
 import "aos/dist/aos.css"; // AOS styles
 import Loader from "../components/Loader"; // ← Import the Loader component
+import Seo from "../components/Seo";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -33,6 +34,14 @@ const Blog = () => {
 
   return (
     <div className="max-w-6xl min-h-screen mx-auto px-4 py-10">
+      <Seo
+        title="Blog – Reveuse Solutions | Tech Insights & How-Tos"
+        description="Read articles on trending tech topics, tutorials, and industry insights from the team at Reveuse Solutions."
+        keywords="tech blog, development articles, programming, software tutorials, IT trends"
+        url="https://www.thereveuse.com/blog"
+        image="https://www.thereveuse.com/assets/blog.jpg"
+      />
+
       <div data-aos="zoom-in">
         <Heading text1="All" text2="Blogs" />
       </div>

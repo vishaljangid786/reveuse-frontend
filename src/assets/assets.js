@@ -64,7 +64,11 @@ export const images = [
     title: "SOLVE. DELIVER. EXCEL. Every Time.",
     desc: "Our Consulting and Outsourcing services align with your goals. Driving success, sustaining growth.",
   },
-  { src: img2, title: "Slide 2", desc: "Second slide description" },
+  {
+    src: img2,
+    title: "Empowering Business Excellence",
+    desc: "Experience strategic growth and optimized operations with our customized outsourcing solutions, tailored to drive your business forward.",
+  },
   { src: img3, title: "Slide 3", desc: "Third slide description" },
 ];
 
@@ -98,38 +102,7 @@ export const faqs = [
 ];
 
 export const imagesCompanies = [img1, img2, img3, contact];
-export const steps = [
-  {
-    icon: "🌐",
-    step: "01",
-    title: "Make An Inquiry",
-    desc: "Start by making an inquiry with our team to explore your options.",
-  },
-  {
-    icon: "✏️",
-    step: "02",
-    title: "Discuss With The Manager",
-    desc: "Have a detailed discussion with a manager to plan the next steps.",
-  },
-  {
-    icon: "👀",
-    step: "03",
-    title: "Share Information",
-    desc: "Share your detailed information to help us serve you better.",
-  },
-  {
-    icon: "🩷",
-    step: "04",
-    title: "Custom Solutions",
-    desc: "We tailor solutions specifically to your needs for the best results.",
-  },
-  {
-    icon: "🚀",
-    step: "05",
-    title: "Launch & Grow",
-    desc: "Finalize everything and watch your success story take off with us!",
-  },
-];
+
 
 export const features = [
   {

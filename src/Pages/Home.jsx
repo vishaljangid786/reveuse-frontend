@@ -7,7 +7,9 @@ import FAQ from "../components/FAQ";
 import CompaniesOverview from "../components/CompaniesOverview";
 import BlogSlider from "../components/BlogSlider";
 import HomeContact from "../components/HomeContact.jsx";
-import Services from "./Services.jsx";
+import ServicesList from "./ServicesList.jsx";
+import Seo from "../components/Seo.jsx";
+import Heading from "../components/Heading.jsx";
 
 const Home = () => {
   useEffect(() => {
@@ -15,12 +17,21 @@ const Home = () => {
   }, []);
   return (
     <div>
+      <Seo
+        title="Reveuse Solutions – Innovative IT Services & Blogs"
+        description="Explore web solutions, services, and tech blogs with Reveuse Solutions – your digital growth partner."
+        keywords="Reveuse Solutions, IT services, blog, web development, app development, software company"
+        url="https://www.thereveuse.com"
+        image="https://www.thereveuse.com/assets/banner.jpg" // Update this to actual image
+      />
+      
       <div data-aos="zoom-in">
         <ImageSlider />
       </div>
       {/* <HomeServices /> */}
-      <div className="mt-16" data-aos="fade-up">
-        <Services />
+      <div className="mt-16 max-w-6xl mx-auto" data-aos="fade-up">
+        <Heading text1={"Latest"} text2={"Services"} />
+        <ServicesList />
       </div>
       <div className="mt-16" data-aos="fade-up">
         <HomeAbout />

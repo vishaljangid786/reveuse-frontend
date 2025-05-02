@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import Contact from "../assets/aeb332098d3a352c570beecb08b08d3f.png"; // Adjust the path as necessary
+import Seo from "../components/Seo";
 
 const ContactUs = () => {
   const form = useRef();
@@ -33,6 +34,14 @@ const ContactUs = () => {
       style={{
         backgroundImage: `url(https://www.shutterstock.com/image-photo/contact-us-concept-hand-show-600nw-2503143861.jpg)`,
       }}>
+      <Seo
+        title="Contact Reveuse Solutions | Let's Build Something Great"
+        description="Get in touch with the Reveuse Solutions team for custom digital solutions tailored to your business."
+        keywords="contact Reveuse, IT support, business solutions, tech consultation"
+        url="https://www.thereveuse.com/contact"
+        image="https://www.thereveuse.com/assets/contact.jpg"
+      />
+
       <div className="bg-white/30 rounded-3xl shadow-lg p-6 md:p-10 max-w-4xl w-full flex flex-col md:flex-row gap-10">
         <div className="md:w-1/2 flex justify-center">
           <img

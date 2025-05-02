@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { backendurl } from "../App";
 import Heading from "../components/Heading";
+import Seo from "../components/Seo";
 
 const ServiceDetails = () => {
   const { id } = useParams();
@@ -33,6 +34,14 @@ const ServiceDetails = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
+      <Seo
+        title={`${service.name} – Service by Reveuse Solutions`}
+        description={service.description.slice(0, 150)}
+        keywords={`${service.name}, IT services, Reveuse`}
+        url={`https://www.thereveuse.com/services/${service._id}`}
+        image={service.image}
+      />
+
       <Heading text1={"Service"} text2={"Details"} />
 
       <button
@@ -83,7 +92,9 @@ const ServiceDetails = () => {
         )}
 
         <h1 className="text-3xl font-bold text-gray-800">{service.title}</h1>
-        <p className="text-gray-700 text-lg whitespace-pre-line">{service.description}</p>
+        <p className="text-gray-700 text-lg whitespace-pre-line">
+          {service.description}
+        </p>
       </div>
     </div>
   );
