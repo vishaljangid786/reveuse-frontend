@@ -7,9 +7,9 @@ import {
   faBars,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import img1 from "./home-slider1.jpg";
-import img2 from "./home-slider2.jpg";
-import img3 from "./home-slider3.jpg";
+import img1 from "./img1.jpg";
+import img2 from "./img2.jpg";
+import img3 from "./img3.jpg";
 import contact from './aeb332098d3a352c570beecb08b08d3f.png'
 
 export {

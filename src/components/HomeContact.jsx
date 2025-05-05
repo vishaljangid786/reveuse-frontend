@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import bgPattern from "../assets/home-slider3.jpg"; // Use a pattern or gradient background
+import bgPattern from "../assets/img8.jpg"; // Use a pattern or gradient background
 
 const HomeContact = () => {
   const form = useRef();

@@ -5,6 +5,7 @@ import HomeContact from "../components/HomeContact";
 import Heading from "../components/Heading";
 import Seo from "../components/Seo";
 import MeetTeam from "../components/MeetTeam";
+import img7 from "../assets/img9.jpg"; // Replace with actual image import
 
 const Aboutus = () => {
   useEffect(() => {
@@ -46,9 +47,9 @@ const Aboutus = () => {
         {/* Banner Image */}
         <div className="mb-16" data-aos="zoom-in">
           <img
-            src="https://images.unsplash.com/photo-1495020689067-958852a7765e"
+            src={img7}
             alt="About Reveuse"
-            className="w-full h-80 object-cover rounded-xl shadow-md"
+            className="w-full h-[500px] object-cover rounded-xl shadow-md"
           />
           <p className="text-sm text-gray-500 mt-2 text-right">
             Image by Annie Spratt
