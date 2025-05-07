@@ -41,6 +41,7 @@ const App = () => {
     <HelmetProvider>
       <BrowserRouter>
         <Navbar />
+        <p>hello</p>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<Aboutus />} />
