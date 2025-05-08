@@ -10,6 +10,7 @@ import HomeContact from "../components/HomeContact.jsx";
 import ServicesList from "./ServicesList.jsx";
 import Seo from "../components/Seo.jsx";
 import Heading from "../components/Heading.jsx";
+import ServicePortfolio from "../components/ServicePortfolio.jsx";
 
 const Home = () => {
   useEffect(() => {
@@ -38,6 +39,9 @@ const Home = () => {
       </div>
       <div className="mt-16" data-aos="fade-up">
         <CompaniesOverview />
+      </div>
+      <div className="mt-16" data-aos="zoom-in">
+        <ServicePortfolio />
       </div>
       <div className="mt-16" data-aos="zoom-in">
         <FAQ />

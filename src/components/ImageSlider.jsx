@@ -30,6 +30,7 @@ const ImageSlider = () => {
           <motion.img
             key={images[currentIndex].src}
             src={images[currentIndex].src}
+            loading="lazy"
             alt={images[currentIndex].title}
             className="w-full h-full object-cover absolute"
             variants={slideVariants}

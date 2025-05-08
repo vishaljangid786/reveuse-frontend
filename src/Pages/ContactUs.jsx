@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import Contact from "../assets/aeb332098d3a352c570beecb08b08d3f.png"; // Adjust the path as necessary
+import Contact from "../assets/aeb332098d3a352c570beecb08b08d3f.webp"; // Adjust the path as necessary
 import Seo from "../components/Seo";
 
 const ContactUs = () => {

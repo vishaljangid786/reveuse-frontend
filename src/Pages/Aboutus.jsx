@@ -5,7 +5,7 @@ import HomeContact from "../components/HomeContact";
 import Heading from "../components/Heading";
 import Seo from "../components/Seo";
 import MeetTeam from "../components/MeetTeam";
-import img7 from "../assets/img9.jpg"; // Replace with actual image import
+import img7 from "../assets/img9.webp"; // Replace with actual image import
 
 const Aboutus = () => {
   useEffect(() => {

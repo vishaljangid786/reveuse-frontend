@@ -7,10 +7,10 @@ import {
   faBars,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import img1 from "./img1.jpg";
-import img2 from "./img2.jpg";
-import img3 from "./img3.jpg";
-import contact from './aeb332098d3a352c570beecb08b08d3f.png'
+import img1 from "/images/slide1.webp";
+import img2 from "/images/slide2.webp";
+import img3 from "/images/slide3.webp";
+import contact from './aeb332098d3a352c570beecb08b08d3f.webp' 
 
 export {
   img1,
@@ -69,7 +69,7 @@ export const images = [
     title: "Empowering Business Excellence",
     desc: "Experience strategic growth and optimized operations with our customized outsourcing solutions, tailored to drive your business forward.",
   },
-  { src: img3, title: "Slide 3", desc: "Third slide description" },
+  { src: img3, title: "Your Business", desc: ", Our Expertise, a Shared Success Story" },
 ];
 
 export const faqs = [

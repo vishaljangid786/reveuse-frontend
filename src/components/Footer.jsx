@@ -4,7 +4,7 @@ import {
   faInstagram,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.webp";
 import {Link} from "react-router-dom";
 
 export default function Footer() {
