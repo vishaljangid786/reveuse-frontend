@@ -1,28 +1,34 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import bgPattern from "../assets/img8.webp"; // Use a pattern or gradient background
+import bgPattern from "../assets/img8.webp";
 
 const HomeContact = () => {
   const form = useRef();
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     emailjs
       .sendForm(
-        "your_service_id", // replace with actual ID
-        "your_template_id", // replace with actual template ID
+        "service_nvkapih",
+        "template_j3t3y7c",
         form.current,
-        "your_public_key" // replace with actual public key
+        "4K4NskaqVN57E6QZc"
       )
       .then(
         (result) => {
           console.log(result.text);
+          form.current.reset();
           setSubmitted(true);
+          setLoading(false);
+          setTimeout(() => setSubmitted(false), 5000);
         },
         (error) => {
           console.log(error.text);
+          setLoading(false);
         }
       );
   };
@@ -85,17 +91,49 @@ const HomeContact = () => {
               placeholder="Your Message"
               required
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+
+            {/* Submit Button with Loading State */}
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-indigo-500 via-blue-500 to-pink-500 hover:to-indigo-500 hover:from-pink-500  text-white font-bold py-3 rounded-lg shadow-md hover:shadow-xl transition duration-300 relative overflow-hidden group">
-              <span className="relative z-10">Send Message</span>
-              {/* Pulse effect on hover */}
-              <span className="absolute inset-0 bg-white opacity-10 group-hover:animate-ping rounded-lg"></span>
+              disabled={loading}
+              className={`w-full ${
+                loading
+                  ? "bg-blue-400 cursor-not-allowed"
+                  : "bg-gradient-to-r from-indigo-500 via-blue-500 to-pink-500 hover:to-indigo-500 hover:from-pink-500"
+              } text-white font-bold py-3 rounded-lg shadow-md hover:shadow-xl transition duration-300 relative overflow-hidden group flex items-center justify-center`}>
+              {loading ? (
+                <>
+                  <svg
+                    className="animate-spin h-5 w-5 mr-2 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24">
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v8H4z"></path>
+                  </svg>
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <span className="relative z-10">Send Message</span>
+                  <span className="absolute inset-0 bg-white opacity-10 group-hover:animate-ping rounded-lg"></span>
+                </>
+              )}
             </button>
 
+            {/* Success Message */}
             {submitted && (
-              <p className="text-green-600 text-sm mt-2">
-                Message sent successfully!
+              <p className="text-green-700 bg-green-100 border border-green-400 p-3 rounded-lg text-sm text-center mt-3">
+                ✅ Message sent successfully! We’ll get back to you shortly.
               </p>
             )}
           </form>

@@ -43,11 +43,12 @@ const Navbar = () => {
 
   return (
     <div
-      className={`bg-white shadow-md py-4 px-0 sm:px-10 sticky w-full top-0 z-50 transition-transform duration-300 ease-in-out ${
-        isNavbarVisible ? "translate-y-0" : "-translate-y-full"
-      }`}>
+      className={`bg-white shadow-md py-4 px-0 sm:px-10 sticky w-full top-0 z-50 transition-transform duration-300 ease-in-out ${isNavbarVisible ? "translate-y-0" : "-translate-y-full"
+        }`}>
       <div className="flex justify-between items-center">
-        <img src={logo} className="w-20" alt="Logo" />
+        <Link to="/">
+          <img src={logo} className="w-20" alt="Logo" />
+        </Link>
 
         {/* Desktop Menu */}
         <ul className="hidden sm:flex gap-8 items-center text-gray-700 font-medium">
@@ -57,13 +58,11 @@ const Navbar = () => {
               <Link
                 to={item.link}
                 key={index}
-                className={`relative group transition-all duration-300 cursor-pointer ${
-                  item.label === "Contact Us"
+                className={`relative group transition-all duration-300 cursor-pointer ${item.label === "Contact Us"
                     ? "text-white bg-blue-500 px-5 py-2 rounded hover:text-blue border border-blue-500 hover:bg-white hover:text-blue-500"
-                    : `hover:text-blue-600 ${
-                        isActive ? "text-blue-600 font-bold" : ""
-                      }`
-                }`}>
+                    : `hover:text-blue-600 ${isActive ? "text-blue-600 font-bold" : ""
+                    }`
+                  }`}>
                 <div className="flex items-center gap-2">
                   <div className="lg:block hidden">
                     <FontAwesomeIcon icon={item.icon} />
@@ -73,9 +72,8 @@ const Navbar = () => {
 
                 {item.label !== "Contact Us" && (
                   <span
-                    className={`absolute rounded-full left-0 -bottom-1 h-[2px] w-full origin-left scale-x-0 bg-blue-600 transition-transform duration-300 group-hover:scale-x-100 ${
-                      isActive ? "scale-x-100" : ""
-                    }`}></span>
+                    className={`absolute rounded-full left-0 -bottom-1 h-[2px] w-full origin-left scale-x-0 bg-blue-600 transition-transform duration-300 group-hover:scale-x-100 ${isActive ? "scale-x-100" : ""
+                      }`}></span>
                 )}
               </Link>
             );
@@ -107,9 +105,8 @@ const Navbar = () => {
 
       {/* Mobile Dropdown */}
       <div
-        className={`sm:hidden transition-all duration-500 ease-in-out overflow-hidden ${
-          isMobileMenuOpen ? "max-h-96 mt-4" : "max-h-0"
-        }`}>
+        className={`sm:hidden transition-all duration-500 ease-in-out overflow-hidden ${isMobileMenuOpen ? "max-h-96 mt-4" : "max-h-0"
+          }`}>
         <ul className="flex flex-col gap-2 px-2 pt-2 bg-white rounded-md shadow text-gray-700 font-medium">
           {navLinks.map((item, index) => {
             const isActive = location.pathname === item.link;
@@ -123,11 +120,10 @@ const Navbar = () => {
                   </li>
                 ) : (
                   <li
-                    className={`flex items-center gap-3 ${
-                      isActive
+                    className={`flex items-center gap-3 ${isActive
                         ? "text-blue-600 pb-2 px-4 border-b font-bold"
                         : "hover:text-blue-600 px-2 py-2 transition-all duration-300 cursor-pointer"
-                    }`}>
+                      }`}>
                     <FontAwesomeIcon icon={item.icon} />
                     <span>{item.label}</span>
                   </li>
