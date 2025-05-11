@@ -41,7 +41,7 @@ const HomeContact = () => {
         backgroundSize: "cover",
         backgroundBlendMode: "overlay",
       }}>
-      <div className="bg-white/60 backdrop-blur-md shadow-2xl rounded-3xl max-w-5xl w-full p-8 md:p-14 flex flex-col md:flex-row gap-10 border border-gray-300">
+      <div className="bg-white/60 mulish backdrop-blur-md shadow-2xl rounded-3xl max-w-5xl w-full p-8 md:p-14 flex flex-col md:flex-row gap-10 border border-gray-300">
         {/* Left Section */}
         <div className="md:w-1/2 space-y-6 flex flex-col justify-center">
           <h2 className="text-4xl font-bold text-gray-800">Let's Talk!</h2>

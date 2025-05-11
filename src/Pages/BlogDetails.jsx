@@ -129,7 +129,7 @@ const BlogDetails = () => {
       <Seo
         title={`${blog.title} – Reveuse Blog`}
         description={blog.summary || blog.content.slice(0, 150)}
-        keywords={blog.tags.join(", ")}
+        keywords={blog.tags?.join(", ")}
         url={`https://www.thereveuse.com/blogs/${blog._id}`}
         image={blog.thumbnail}
       />
@@ -167,7 +167,7 @@ const BlogDetails = () => {
               )
             }
             className="absolute bottom-2 right-2 bg-black/60 text-white px-3 py-1 text-sm rounded-md opacity-0 group-hover:opacity-100 transition">
-            <i class="fa-solid fa-expand"></i>
+            <i className="fa-solid fa-expand"></i>
           </button>
         </div>
       )}
@@ -175,7 +175,7 @@ const BlogDetails = () => {
       <h1 className="text-4xl font-extrabold text-gradient bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
         {blog.title}
       </h1>
-      <p className="text-lg text-gray-800 whitespace-pre-line ">
+      <p className="text-lg text-gray-800 whitespace-pre-line  mulish">
         {blog.content}
       </p>
 

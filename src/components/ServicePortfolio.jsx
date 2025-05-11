@@ -39,10 +39,10 @@ const ServicePortfolio = () => {
             key={index}
             className="bg-blue-500 p-6 rounded-2xl shadow-lg hover:shadow-blue-300/30 transition"
           >
-            <h3 className="text-white text-lg font-semibold mb-3">
+            <h3 className="text-white text-xl font-semibold mb-3">
               {service.title}
             </h3>
-            <p className="text-blue-100 text-sm leading-relaxed">
+            <p className="text-blue-100 mulish leading-relaxed">
               {service.description}
             </p>
           </div>

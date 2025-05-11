@@ -22,7 +22,7 @@ const Aboutus = () => {
         image="https://www.thereveuse.com/assets/about-banner.jpg"
       />
 
-      <div className="bg-gray-50 min-h-screen px-6 py-12 md:px-20 lg:px-32 font-sans">
+      <div className="bg-gray-50 mulish min-h-screen px-6 py-12 md:px-20 lg:px-32 font-sans">
         {/* Page Heading */}
         <div className="text-center mb-16" data-aos="fade-down">
           <Heading text1="The Story" text2="of Reveuse" />
@@ -63,7 +63,7 @@ const Aboutus = () => {
           <h2 className="text-2xl font-semibold text-blue-600 mb-4">
             Our Vision
           </h2>
-          <p className="text-gray-700 leading-relaxed text-lg">
+          <p className="text-gray-700 leading-relaxed text-lg ">
             Our vision is to become a globally recognized outsourcing partner
             known for innovation, excellence, and trust. We aspire to set new
             benchmarks in service delivery by empowering businesses with

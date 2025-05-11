@@ -57,8 +57,8 @@ const Navbar = () => {
             return (
               <Link
                 to={item.link}
-                key={index}
-                className={`relative group transition-all duration-300 cursor-pointer ${item.label === "Contact Us"
+                key={index} 
+                className={`relative mulish group transition-all duration-300 cursor-pointer ${item.label === "Contact Us"
                     ? "text-white bg-blue-500 px-5 py-2 rounded hover:text-blue border border-blue-500 hover:bg-white hover:text-blue-500"
                     : `hover:text-blue-600 ${isActive ? "text-blue-600 font-bold" : ""
                     }`

@@ -9,6 +9,8 @@ const AllServices = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [editingService, setEditingService] = useState(null);
+  const [updating, setUpdating] = useState(false);
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -63,6 +65,12 @@ const AllServices = () => {
     e.preventDefault();
     if (!editingService) return;
 
+    // Check if image is too large (max 10MB)
+    if (formData.image && formData.image.size > 5 * 1024 * 1024) {
+      alert("Image file is too large. Maximum size is 5MB.");
+      return;
+    }
+
     const data = new FormData();
     data.append("title", formData.title);
     data.append("description", formData.description);
@@ -71,6 +79,7 @@ const AllServices = () => {
     }
 
     try {
+      setUpdating(true);
       const res = await axios.put(
         `${backendurl}/api/services/${editingService._id}`,
         data
@@ -81,6 +90,8 @@ const AllServices = () => {
       setEditingService(null);
     } catch (err) {
       alert("Failed to update service.");
+    }finally{
+      setUpdating(false);
     }
   };
 
@@ -107,7 +118,11 @@ const AllServices = () => {
               )}
               <div className="p-4">
                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                <p className="text-gray-600 mb-4">{service.description}</p>
+                <p className="text-gray-600 mb-4">
+                  {service.description.split(" ").slice(0, 20).join(" ")}
+                  {service.description.split(" ").length > 20 ? "..." : ""}
+                </p>
+
                 <div className="flex gap-2">
                   <button
                     onClick={() => startEditing(service)}
@@ -166,8 +181,9 @@ const AllServices = () => {
               </button>
               <button
                 type="submit"
-                className="px-4 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                Update
+                className="px-4 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                disabled={updating}>
+                {updating ? "Updating..." : "Update"}
               </button>
             </div>
           </form>

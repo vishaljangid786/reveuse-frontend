@@ -69,7 +69,11 @@ export const images = [
     title: "Empowering Business Excellence",
     desc: "Experience strategic growth and optimized operations with our customized outsourcing solutions, tailored to drive your business forward.",
   },
-  { src: img3, title: "Your Business", desc: ", Our Expertise, a Shared Success Story" },
+  {
+    src: img3,
+    title: "Your Business, Our Expertise, a Shared Success Story",
+    desc: "",
+  },
 ];
 
 export const faqs = [

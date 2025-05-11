@@ -81,7 +81,7 @@ const BlogSlider = () => {
           >
             {steps.map((step, index) => (
               <SwiperSlide key={index}>
-                <div className="bg-gray-100 p-8 rounded-xl text-center hover:shadow-lg transition">
+                <div className="bg-gray-100 p-8 rounded-xl text-center mulish hover:shadow-lg transition">
                   <div className="text-4xl mb-4">{step.icon}</div>
                   <h3 className="text-xl font-semibold mb-2">{step.step}</h3>
                   <h2 className="text-2xl font-bold mb-4">{step.title}</h2>

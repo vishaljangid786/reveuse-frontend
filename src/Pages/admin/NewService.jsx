@@ -7,7 +7,20 @@ const NewService = () => {
     title: "",
     description: "",
     image: null,
+    details: [
+      { head: "", description: "" },
+      { head: "", description: "" },
+      { head: "", description: "" },
+      { head: "", description: "" },
+    ],
   });
+
+  const handleDetailChange = (index, field, value) => {
+    const updatedDetails = [...formData.details];
+    updatedDetails[index][field] = value;
+    setFormData((prev) => ({ ...prev, details: updatedDetails }));
+  };
+
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -53,6 +66,7 @@ const NewService = () => {
 
     const data = new FormData();
     data.append("title", formData.title);
+    data.append("details", JSON.stringify(formData.details));
     data.append("description", formData.description);
 
     if (formData.image) {
@@ -87,59 +101,66 @@ const NewService = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white shadow-2xl rounded-2xl mt-10">
-      <h2 className="text-2xl font-bold mb-4 text-center">
-        <Heading text1={"Create"} text2="New Service" />
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-2xl rounded-2xl mt-10">
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+        <Heading text1="Create" text2="New Service" />
       </h2>
+
       <form
         onSubmit={handleSubmit}
         onDragEnter={handleDrag}
         onDragOver={handleDrag}
         onDragLeave={handleDrag}
         onDrop={handleDrop}
-        className="space-y-5">
+        className="space-y-6">
+        {/* Title Section */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Title
+          <label className="block text-xl mulish font-medium text-gray-700 mb-2">
+            Service Title
           </label>
           <input
             type="text"
+            placeholder="Enter Service Title"
             name="title"
             value={formData.title}
             onChange={handleChange}
             required
-            className="mt-1 w-full p-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300"
           />
         </div>
 
+        {/* Description Section */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Description
+          <label className="block text-xl mulish font-medium text-gray-700 mb-2">
+            Service Description
           </label>
           <textarea
             name="description"
+            placeholder="Write a detailed description of the service"
             value={formData.description}
             onChange={handleChange}
             required
             rows="4"
-            className="mt-1 w-full p-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300"
           />
         </div>
 
+        {/* Image Upload Section */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Image
+          <label className="block text-xl mulish font-medium text-gray-700 mb-1">
+            Service Image
           </label>
-
           <div
-            className={`w-full p-6 border-2 border-dashed rounded-lg text-center transition ${
+            className={`w-full p-6 border-2 border-dashed rounded-lg text-center transition duration-300 ${
               dragActive ? "border-blue-600 bg-blue-50" : "border-gray-400"
             }`}>
             <p className="mb-2 text-gray-500">
               Drag & drop an image here, or{" "}
-              <span className="text-blue-600 underline">browse</span>
+              <span className="text-blue-600 underline cursor-pointer">
+                browse
+              </span>
             </p>
-            <label className="inline-block bg-gray-200 text-gray-800 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 transition duration-200">
+            <label className="inlinetext-xl mulishbg-gray-200 text-gray-800 px-6 py-2 rounded-lg cursor-pointer hover:bg-gray-300 transition duration-200">
               Choose File
               <input
                 type="file"
@@ -151,6 +172,7 @@ const NewService = () => {
             </label>
           </div>
 
+          {/* Preview Image */}
           {preview && (
             <img
               src={preview}
@@ -160,13 +182,53 @@ const NewService = () => {
           )}
         </div>
 
+        {/* Service Details Section */}
+        <div className="space-y-6">
+          <label className="block text-xl mulish font-semibold text-gray-800 mb-4">
+            Service Details
+          </label>
+          {formData.details?.map((detail, index) => (
+            <div
+              key={index}
+              className="p-6 bg-white shadow-lg rounded-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
+              <div className="mb-4">
+                <input
+                  type="text"
+                  placeholder={`Heading ${index + 1}`}
+                  value={detail.head}
+                  onChange={(e) =>
+                    handleDetailChange(index, "head", e.target.value)
+                  }
+                  className="w-full p-3 border-2 border-gray-300 rounded-lg text-lg font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300"
+                  required
+                />
+              </div>
+              <div>
+                <textarea
+                  placeholder={`Description ${index + 1}`}
+                  value={detail.description}
+                  onChange={(e) =>
+                    handleDetailChange(index, "description", e.target.value)
+                  }
+                  rows="4"
+                  className="w-full p-3 border-2 border-gray-300 rounded-lg text-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300"
+                  required
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300">
+          className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500 transition duration-300">
           {loading ? "Creating..." : "Create Service"}
         </button>
       </form>
+
+      {/* Message */}
       {message && (
         <p className="mt-4 text-center text-sm text-gray-600">{message}</p>
       )}
