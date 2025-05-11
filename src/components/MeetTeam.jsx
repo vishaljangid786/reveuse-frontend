@@ -36,7 +36,7 @@ const MeetTeam = () => {
             alt="R Dangi"
             className="w-48 h-48 rounded-full mx-auto mb-4 object-cover object-top"
           />
-          <h3 className="font-bold text-lg text-gray-800">R Dangi</h3>
+          <h3 className="font-bold text-lg text-gray-800">VS Sukhwal</h3>
           <p className="text-blue-600 text-sm">Head of Operations</p>
         </div>
       </div>
