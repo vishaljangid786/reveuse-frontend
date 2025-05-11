@@ -13,10 +13,10 @@ const HomeContact = () => {
 
     emailjs
       .sendForm(
-        "service_nvkapih",
-        "template_j3t3y7c",
+        "service_qlhmbct",
+        "template_3izuove",
         form.current,
-        "4K4NskaqVN57E6QZc"
+        "McAGVU7aUYBO2XdG9"
       )
       .then(
         (result) => {

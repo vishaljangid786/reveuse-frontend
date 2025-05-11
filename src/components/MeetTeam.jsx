@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import img1 from "../assets/founder.webp";
-import img2 from "/head.webp";
+import img2 from "/Dangi.jpeg";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -34,7 +34,7 @@ const MeetTeam = () => {
           <img
             src={img2}
             alt="R Dangi"
-            className="w-48 h-48 rounded-full mx-auto mb-4 object-cover"
+            className="w-48 h-48 rounded-full mx-auto mb-4 object-cover object-top"
           />
           <h3 className="font-bold text-lg text-gray-800">R Dangi</h3>
           <p className="text-blue-600 text-sm">Head of Operations</p>
