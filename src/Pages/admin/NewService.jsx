@@ -90,7 +90,12 @@ const NewService = () => {
       }
 
       setMessage("Service created successfully!");
-      setFormData({ title: "", description: "", image: null });
+      setFormData({ title: "", description: "", image: null ,details: [
+      { head: "", description: "" },
+      { head: "", description: "" },
+      { head: "", description: "" },
+      { head: "", description: "" },
+    ],});
       setPreview(null);
     } catch (error) {
       setMessage(error.message || "Error creating service. Please try again.");

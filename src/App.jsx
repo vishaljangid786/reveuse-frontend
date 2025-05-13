@@ -17,8 +17,8 @@ import NewService from "./Pages/admin/NewService.jsx";
 import ServiceDetails from "./Pages/ServiceDetails.jsx";
 import { HelmetProvider } from "react-helmet-async";
 
-// export const backendurl = "http://localhost:5000";
-export const backendurl = "https://thereveuse.com";
+export const backendurl = "http://localhost:5000";
+// export const backendurl = "https://thereveuse.com";
 
 const App = () => {
   const [isVisible, setIsVisible] = useState(false);
