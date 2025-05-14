@@ -16,6 +16,7 @@ import AllBlog from "./Pages/admin/AllBlog.jsx";
 import NewService from "./Pages/admin/NewService.jsx";
 import ServiceDetails from "./Pages/ServiceDetails.jsx";
 import { HelmetProvider } from "react-helmet-async";
+import FAQ from "./components/FAQ.jsx";
 
 // export const backendurl = "http://localhost:5000";
 export const backendurl = "https://thereveuse.com";
@@ -46,6 +47,7 @@ const App = () => {
           <Route path="/about" element={<Aboutus />} />
           <Route path="/services" element={<Services />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="faq" element={<FAQ />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/blogs/:id" element={<BlogDetails />} />

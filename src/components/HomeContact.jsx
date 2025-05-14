@@ -50,8 +50,8 @@ const HomeContact = () => {
             be in touch soon.
           </p>
           <ul className="text-gray-700 space-y-2 text-sm">
-            <li>📞 +91-1234567890</li>
-            <li>📧 hello@example.com</li>
+            <li>📞 +91-9530104044</li>
+            <li>📧 info@thereveuse.com</li>
             <li>🏢 New Delhi, India</li>
           </ul>
         </div>

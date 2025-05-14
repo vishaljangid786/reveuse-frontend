@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from "../assets/logo.webp";
+import logo from "/logo/light.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLocation } from "react-router-dom";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -43,7 +43,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`bg-white shadow-md py-4 px-0 sm:px-10 sticky w-full top-0 z-50 transition-transform duration-300 ease-in-out ${isNavbarVisible ? "translate-y-0" : "-translate-y-full"
+      className={`bg-white shadow-md  px-0 sm:px-10 sticky w-full top-0 z-50 transition-transform duration-300 ease-in-out ${isNavbarVisible ? "translate-y-0" : "-translate-y-full"
         }`}>
       <div className="flex justify-between items-center">
         <Link to="/">

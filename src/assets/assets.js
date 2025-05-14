@@ -6,6 +6,7 @@ import {
   faEnvelope,
   faBars,
   faXmark,
+  faQuestion,
 } from "@fortawesome/free-solid-svg-icons";
 import img1 from "/images/slide1.webp";
 import img2 from "/slider2.jpeg";
@@ -24,6 +25,7 @@ export const navLinks = [
   { icon: faCogs, label: "Services", link: "/services" },
   { icon: faInfoCircle, label: "About Us", link: "/about" },
   { icon: faBlog, label: "Blog", link: "/blog" },
+  {icon: faQuestion, label: "FAQ", link: "/faq"},
   { icon: faEnvelope, label: "Contact Us", link: "/contact" },
 ];
 

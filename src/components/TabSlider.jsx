@@ -8,27 +8,27 @@ const tabs = [
     title: "Data Security",
     image: "/images/slide1.webp",
     description:
-      "Ensuring the security and privacy of your data is our top priority. We implement robust security measures to protect your information.",
+      "As an ISO/IEC 27001:2022-certified organization, we safeguard your critical information with rigorous measures, ensuring confidentiality, integrity, and availability. Our commitment to globally recognized standards and continuous monitoring protects your sensitive data. Trust us with your data and rely on our expertise. We prioritize security and confidentiality.",
   },
   {
     id: "Tools & Technologies",
     title: "Tools & Technologies",
     image: "/images/slide1.webp",
-    description: "Innovative tools and technologies for smart waste management.",
+    description: "We leverage cutting-edge tools and technologies to deliver high-quality services, including advanced data analytics and visualization tools, cloud-based platforms for scalable and secure operations, robust cybersecurity measures to protect sensitive data, and industry-leading software solutions. By staying up-to-date with the latest technologies, we drive innovation, efficiency, and excellence in our services, ensuring our clients receive the best possible outcomes.",
   },
   {
     id: "Expert Team",
     title: "Expert Team",
     image: "/images/slide1.webp",
     description:
-      "Smart waste management systems for a cleaner environment. We provide innovative solutions to optimize waste collection and recycling.",
+      " Our team of experts brings extensive experience and knowledge to deliver high-quality services. Our professionals are skilled, dedicated, and passionate about helping clients achieve their goals. With a deep understanding of industry trends and best practices, our team provides innovative solutions and exceptional support. We foster a collaborative environment that encourages growth, learning, and excellence. Our team's expertise and commitment ensure our clients receive the best possible outcomes. Trust our experts to drive your success.",
   },
   {
     id: "World-class Infrastructure",
     title: "World-class Infrastructure",
     image: "/images/slide1.webp",
     description:
-      "Our team of experts is dedicated to providing top-notch solutions. We are here to help you every step of the way.",
+      "We invest in world-class infrastructure to support our clients' needs. Our state-of-the-art facilities and cutting-edge technology enable seamless operations, efficient communication, and secure data management. With robust systems and reliable networks, we ensure high-performance capabilities and minimal downtime. Our infrastructure is designed to support scalability, flexibility, and innovation, allowing us to deliver exceptional services to our clients. By leveraging the latest advancements, we drive efficiency and excellence in everything we do.",
   },
 ];
 
