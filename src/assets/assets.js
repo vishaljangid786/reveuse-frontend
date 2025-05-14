@@ -8,7 +8,7 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import img1 from "/images/slide1.webp";
-import img2 from "/images/slide2.webp";
+import img2 from "/slider2.jpeg";
 import img3 from "/images/slide3.webp";
 import contact from './aeb332098d3a352c570beecb08b08d3f.webp' 
 
