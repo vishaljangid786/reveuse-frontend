@@ -7,11 +7,13 @@ import {
   faBars,
   faXmark,
   faQuestion,
+  faPlane,
 } from "@fortawesome/free-solid-svg-icons";
 import img1 from "/images/slide1.webp";
 import img2 from "/slider2.jpeg";
 import img3 from "/images/slide3.webp";
 import contact from './aeb332098d3a352c570beecb08b08d3f.webp' 
+import { icon } from "@fortawesome/fontawesome-svg-core";
 
 export {
   img1,
@@ -25,7 +27,7 @@ export const navLinks = [
   { icon: faCogs, label: "Services", link: "/services" },
   { icon: faInfoCircle, label: "About Us", link: "/about" },
   { icon: faBlog, label: "Blog", link: "/blog" },
-  {icon: faQuestion, label: "FAQ", link: "/faq"},
+  {  label: "FAQ", link: "/faq"},
   { icon: faEnvelope, label: "Contact Us", link: "/contact" },
 ];
 

@@ -8,6 +8,11 @@ const ImageSlider = () => {
 
   // Auto-play effect
   useEffect(() => {
+    images.forEach((img) => {
+      const preload = new Image();
+      preload.src = img.src;
+    });
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 5000);
@@ -19,7 +24,9 @@ const ImageSlider = () => {
   };
 
   const handleArrowClick = (direction) => {
-    setCurrentIndex((prev) => (prev + direction + images.length) % images.length);
+    setCurrentIndex(
+      (prev) => (prev + direction + images.length) % images.length
+    );
   };
 
   const slideVariants = {
@@ -51,8 +58,12 @@ const ImageSlider = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-6 text-white flex items-end">
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">{img.title}</h2>
-                  <p className="text-sm sm:text-base md:text-lg mt-2">{img.desc}</p>
+                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">
+                    {img.title}
+                  </h2>
+                  <p className="text-sm sm:text-base md:text-lg mt-2">
+                    {img.desc}
+                  </p>
                 </div>
               </div>
             </div>
@@ -81,7 +92,9 @@ const ImageSlider = () => {
             key={i}
             onClick={() => handleDotClick(i)}
             className={`h-2 w-2 rounded-full transition-all duration-300 ${
-              i === currentIndex ? "bg-blue-500 w-5 scale-110" : "bg-gray-400 w-2"
+              i === currentIndex
+                ? "bg-blue-500 w-5 scale-110"
+                : "bg-gray-400 w-2"
             }`}
           />
         ))}

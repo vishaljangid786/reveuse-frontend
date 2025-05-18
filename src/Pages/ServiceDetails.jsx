@@ -56,7 +56,7 @@ const ServiceDetails = () => {
           {/* Image Section with Fullscreen Icon */}
           <img
             src={service.imageUrl}
-            className="h-[60vh] w-full rounded-2xl cursor-pointer"
+            className="h-[60vh] w-full rounded-2xl cursor-pointer object-cover"
             alt={service.title}
             // onClick={() => setIsImageOpen(true)} // Open full-screen when image is clicked
           />

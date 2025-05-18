@@ -52,7 +52,8 @@ const HomeContact = () => {
           <ul className="text-gray-700 space-y-2 text-sm">
             <li>📞 +91-9530104044</li>
             <li>📧 info@thereveuse.com</li>
-            <li>🏢 New Delhi, India</li>
+            <li>🏢 Nathdwara (Rajasthan),
+            INDIA</li>
           </ul>
         </div>
 

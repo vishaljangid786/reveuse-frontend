@@ -37,7 +37,7 @@ const TabSlider = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-16">
-      <Heading text1={"Smart"} text2={"Solutions"} />
+      <Heading text1={"Why"} text2={"Choose Us ?"} />
 
       {/* Tab Navigation */}
       <div className="flex flex-wrap justify-center gap-3 mb-10 bg-slate-50 p-2 rounded-full shadow-inner">

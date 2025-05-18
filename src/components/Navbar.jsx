@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from "/logo/light.png";
+import logo from "/logo/light2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLocation } from "react-router-dom";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -43,11 +43,11 @@ const Navbar = () => {
 
   return (
     <div
-      className={`bg-white shadow-md  px-0 sm:px-10 sticky w-full top-0 z-50 transition-transform duration-300 ease-in-out ${isNavbarVisible ? "translate-y-0" : "-translate-y-full"
+      className={`bg-white shadow-md  py-4 px-0 sm:px-10 sticky w-full top-0 z-50 transition-transform duration-300 ease-in-out ${isNavbarVisible ? "translate-y-0" : "-translate-y-full"
         }`}>
       <div className="flex justify-between items-center">
         <Link to="/">
-          <img src={logo} className="w-20" alt="Logo" />
+          <img src={logo} className="w-20 md:w-36 sm:ml-0 ml-4" alt="Logo" />
         </Link>
 
         {/* Desktop Menu */}
@@ -65,7 +65,7 @@ const Navbar = () => {
                   }`}>
                 <div className="flex items-center gap-2">
                   <div className="lg:block hidden">
-                    <FontAwesomeIcon icon={item.icon} />
+                    {item.icon && <FontAwesomeIcon icon={item.icon} />}
                   </div>
                   <span>{item.label}</span>
                 </div>
@@ -115,7 +115,7 @@ const Navbar = () => {
               <Link to={item.link} key={index}>
                 {item.label === "Contact Us" ? (
                   <li className="flex w-2/3 mt-5 justify-center items-center gap-3 text-white border-2 border-blue-500 bg-blue-500 rounded-full px-8 py-3 mx-auto transition-all duration-300 hover:bg-white hover:text-blue-500">
-                    <FontAwesomeIcon icon={item.icon} />
+                    {item.icon && <FontAwesomeIcon icon={item.icon} />}
                     <span>{item.label}</span>
                   </li>
                 ) : (
@@ -124,7 +124,7 @@ const Navbar = () => {
                         ? "text-blue-600 pb-2 px-4 border-b font-bold"
                         : "hover:text-blue-600 px-2 py-2 transition-all duration-300 cursor-pointer"
                       }`}>
-                    <FontAwesomeIcon icon={item.icon} />
+                    {item.icon && <FontAwesomeIcon icon={item.icon} />}
                     <span>{item.label}</span>
                   </li>
                 )}
