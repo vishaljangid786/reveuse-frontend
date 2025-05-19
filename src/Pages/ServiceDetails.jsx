@@ -29,6 +29,19 @@ const ServiceDetails = () => {
 
     fetchService();
   }, [id]);
+  
+  useEffect(() => {
+    if (!service || !service.details || service.details.length === 0) return;
+  
+    const interval = setInterval(() => {
+      setSelectedIndex((prevIndex) =>
+        (prevIndex + 1) % service.details.length
+      );
+    }, 3000); // 3 seconds
+  
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [service]);
+  
 
   if (loading) return <p className="text-center py-10">Loading service...</p>;
   if (error) return <p className="text-center text-red-500 py-10">{error}</p>;

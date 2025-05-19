@@ -7,6 +7,7 @@ import AOS from "aos";
 import "aos/dist/aos.css"; // AOS styles
 import Loader from "../components/Loader"; // ← Import the Loader component
 import Seo from "../components/Seo";
+import HomeContact from "../components/HomeContact";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -33,6 +34,7 @@ const Blog = () => {
   );
 
   return (
+    <>
     <div className="max-w-6xl min-h-screen mx-auto px-4 py-10">
       <Seo
         title="Blog – Reveuse Solutions | Tech Insights & How-Tos"
@@ -101,6 +103,8 @@ const Blog = () => {
         </div>
       )}
     </div>
+    <HomeContact />
+    </>
   );
 };
 

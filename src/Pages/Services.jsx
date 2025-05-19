@@ -5,6 +5,7 @@ import axios from "axios";
 import AOS from "aos";
 import { backendurl } from "../App";
 import { Link } from "react-router-dom";
+import HomeContact from "../components/HomeContact";
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -29,6 +30,7 @@ const Services = () => {
   );
 
   return (
+    <>
     <div className="max-w-6xl mx-auto px-4 py-10">
       <Seo
         title="Services – Reveuse Solutions | Custom Web & App Development"
@@ -85,6 +87,8 @@ const Services = () => {
               )}
             </div>
     </div>
+    <HomeContact />
+    </>
   );
 };
 

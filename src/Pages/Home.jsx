@@ -47,14 +47,11 @@ const Home = () => {
       <div className="mt-16" data-aos="zoom-in">
         <ServicePortfolio />
       </div>
-      <div className="mt-16" data-aos="zoom-in">
-        <FAQ />
-      </div>
       <div className="mt-16" data-aos="fade-up">
         <BlogSlider />
       </div>
-      <div className="mt-16" data-aos="fade-up">
-        <HomeContact />
+      <div className="mt-16" data-aos="zoom-in">
+        <FAQ />
       </div>
     </div>
   );
