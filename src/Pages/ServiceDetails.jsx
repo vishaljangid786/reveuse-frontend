@@ -5,6 +5,7 @@ import { backendurl } from "../App";
 import Heading from "../components/Heading";
 import Seo from "../components/Seo";
 import TabSlider from "../components/TabSlider";
+import SuggestedServices from "../components/SuggestedServices.jsx";
 
 const ServiceDetails = () => {
   const { id } = useParams();
@@ -64,7 +65,6 @@ const ServiceDetails = () => {
         >
           ← Back
         </button>
-
         <div className="relative">
           {/* Image Section with Fullscreen Icon */}
           <img
@@ -155,6 +155,8 @@ const ServiceDetails = () => {
       )}
 
       <TabSlider />
+      <SuggestedServices id={service._id} />
+      
     </>
   );
 };

@@ -35,106 +35,83 @@ const HomeContact = () => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center px-6 py-16 bg-gradient-to-r from-indigo-100 via-blue-100 to-pink-100"
+      className="min-h-screen flex items-center justify-center px-6 py-20 bg-cover bg-center"
       style={{
         backgroundImage: `url(${bgPattern})`,
-        backgroundSize: "cover",
         backgroundBlendMode: "overlay",
-      }}>
-      <div className="bg-white/60 mulish backdrop-blur-md shadow-2xl rounded-3xl max-w-5xl w-full p-8 md:p-14 flex flex-col md:flex-row gap-10 border border-gray-300">
+        backgroundColor: "rgba(255,255,255,0.85)",
+      }}
+    >
+      <div className="bg-white/70 backdrop-blur-lg border border-gray-300 shadow-2xl rounded-3xl max-w-6xl w-full p-8 md:p-14 flex flex-col md:flex-row items-center gap-12">
         {/* Left Section */}
-        <div className="md:w-1/2 space-y-6 flex flex-col justify-center">
-          <h2 className="text-4xl font-bold text-gray-800">Let's Talk!</h2>
-          <p className="text-gray-600 text-lg">
-            Have a project or just want to connect? Fill out the form and we’ll
-            be in touch soon.
+        <div className="md:w-1/2 text-center md:text-left space-y-6">
+          <h2 className="text-4xl font-extrabold text-gray-900">Let’s Work Together</h2>
+          <p className="text-gray-700 text-lg">
+            Got a project in mind or just want to say hello? We’re just a message away.
           </p>
-          <ul className="text-gray-700 space-y-2 text-sm">
-            <li>📞 +91-9530104044</li>
-            <li>📧 info@thereveuse.com</li>
-            <li>🏢 Nathdwara (Rajasthan),
-            INDIA</li>
-          </ul>
+          <div className="text-gray-700 space-y-2 text-sm mt-6">
+            <p>📞 +91-9530104044</p>
+            <p>📧 info@thereveuse.com</p>
+            <p>🏢 Nathdwara, Rajasthan, India</p>
+          </div>
         </div>
 
-        {/* Right Section - Form */}
-        <div className="md:w-1/2">
-          <form ref={form} onSubmit={sendEmail} className="space-y-4">
-            <input
-              type="text"
-              name="user_name"
-              placeholder="Your Name"
-              required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <input
-              type="text"
-              name="company"
-              placeholder="Company Name"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <input
-              type="email"
-              name="user_email"
-              placeholder="Your Email"
-              required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+        {/* Right Section - Contact Form */}
+        <div className="md:w-1/2 w-full">
+          <form ref={form} onSubmit={sendEmail} className="space-y-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input
+                type="text"
+                name="user_name"
+                placeholder="Your Name"
+                required
+                className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <input
+                type="text"
+                name="company"
+                placeholder="Company Name"
+                className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone Number"
+                className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <input
+                type="email"
+                name="user_email"
+                placeholder="Your Email"
+                required
+                className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
             <textarea
               name="message"
               rows="4"
               placeholder="Your Message"
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            ></textarea>
 
-            {/* Submit Button with Loading State */}
+            {/* Button */}
             <button
               type="submit"
               disabled={loading}
-              className={`w-full ${
+              className={`w-full py-3 font-semibold text-white rounded-lg transition duration-300 ${
                 loading
                   ? "bg-blue-400 cursor-not-allowed"
-                  : "bg-gradient-to-r from-indigo-500 via-blue-500 to-pink-500 hover:to-indigo-500 hover:from-pink-500"
-              } text-white font-bold py-3 rounded-lg shadow-md hover:shadow-xl transition duration-300 relative overflow-hidden group flex items-center justify-center`}>
-              {loading ? (
-                <>
-                  <svg
-                    className="animate-spin h-5 w-5 mr-2 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24">
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8v8H4z"></path>
-                  </svg>
-                  Sending...
-                </>
-              ) : (
-                <>
-                  <span className="relative z-10">Send Message</span>
-                  <span className="absolute inset-0 bg-white opacity-10 group-hover:animate-ping rounded-lg"></span>
-                </>
-              )}
+                  : "bg-blue-500 hover:bg-transparent border-2 border-blue-500 hover:text-blue-500"
+              }`}
+            >
+              {loading ? "Sending..." : "Send Message"}
             </button>
 
             {/* Success Message */}
             {submitted && (
-              <p className="text-green-700 bg-green-100 border border-green-400 p-3 rounded-lg text-sm text-center mt-3">
-                ✅ Message sent successfully! We’ll get back to you shortly.
+              <p className="text-green-700 bg-green-100 border border-green-400 mt-3 p-3 rounded-md text-sm text-center">
+                ✅ Message sent successfully!
               </p>
             )}
           </form>
