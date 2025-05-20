@@ -24,7 +24,7 @@ const SuggestedServices = ({ id }) => {
     
   return (
     <div className="max-w-7xl mx-auto px-4 py-14 relative">
-      <Heading text1={"Suggested"} text2={"Services"} />
+      <Heading text1={"Our Other"} text2={"Services"} />
 
       {/* Scrollable Container */}
       <div className="relative mt-8 overflow-x-auto py-5 pb-14 hide-scrollbar">
