@@ -37,7 +37,7 @@ const ImageSlider = () => {
 
   return (
     <div className="w-full mx-auto mb-8">
-      <div className="relative overflow-hidden shadow-2xl h-[500px] sm:h-[400px] md:h-[500px] lg:h-[600px]">
+      <div className="relative overflow-hidden shadow-2xl h-[500px] sm:min-h-[90vh] md:h-[500px] lg:h-[600px]">
         {/* Slide Container with animation */}
         <motion.div
           className="flex h-full w-full"

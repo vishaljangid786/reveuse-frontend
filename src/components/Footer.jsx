@@ -4,8 +4,7 @@ import {
   faInstagram,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
-import logo from "/logo/dark2.png";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -15,10 +14,15 @@ export default function Footer() {
         {/* Logo & Description */}
         <div>
           {/* <div className="flex items-center sm:justify-left  justify-center gap-3 mb-4"> */}
-            <img src={logo} alt="The Reveuse Logo" className="w-52 mx-auto sm:mx-0 mb-4 " />
-            <h2 className="text-xl font-bold leading-tight">
-              The RÊVEUSE Solution
-            </h2>
+          <img
+            loading="lazy"
+            src="https://res.cloudinary.com/djvxynk2f/image/upload/v1748309439/dark2_plsxqn.png"
+            alt="The Reveuse Logo"
+            className="w-52 mx-auto sm:mx-0 mb-4 "
+          />
+          <h2 className="text-xl font-bold leading-tight">
+            The RÊVEUSE Solution
+          </h2>
           {/* </div> */}
           <p className="text-sm text-gray-400">
             Empowering Your Digital Dreams

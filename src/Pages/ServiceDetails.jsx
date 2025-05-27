@@ -30,19 +30,16 @@ const ServiceDetails = () => {
 
     fetchService();
   }, [id]);
-  
+
   useEffect(() => {
     if (!service || !service.details || service.details.length === 0) return;
-  
+
     const interval = setInterval(() => {
-      setSelectedIndex((prevIndex) =>
-        (prevIndex + 1) % service.details.length
-      );
+      setSelectedIndex((prevIndex) => (prevIndex + 1) % service.details.length);
     }, 3000); // 3 seconds
-  
+
     return () => clearInterval(interval); // Cleanup on unmount
   }, [service]);
-  
 
   if (loading) return <p className="text-center py-10">Loading service...</p>;
   if (error) return <p className="text-center text-red-500 py-10">{error}</p>;
@@ -61,8 +58,7 @@ const ServiceDetails = () => {
 
         <button
           onClick={() => navigate(-1)}
-          className="mb-6 text-blue-600 hover:underline"
-        >
+          className="mb-6 text-blue-600 hover:underline">
           ← Back
         </button>
         <div className="relative">
@@ -84,14 +80,14 @@ const ServiceDetails = () => {
           <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center">
             <div className="relative max-w-6xl w-full mx-4">
               <img
+                loading="lazy"
                 src={service.imageUrl}
                 alt="Full screen"
                 className="w-full max-h-[90vh] object-contain rounded-lg"
               />
               <button
                 onClick={() => setIsImageOpen(false)} // Close the full-screen modal
-                className="absolute top-4 right-4 bg-white text-black px-2 py-1 rounded-full shadow-md hover:bg-red-600 hover:text-white transition"
-              >
+                className="absolute top-4 right-4 bg-white text-black px-2 py-1 rounded-full shadow-md hover:bg-red-600 hover:text-white transition">
                 ✕
               </button>
             </div>
@@ -126,8 +122,7 @@ const ServiceDetails = () => {
                     isActive
                       ? "bg-blue-600 text-white shadow-lg"
                       : "bg-white text-gray-700 border border-blue-100 hover:bg-blue-50"
-                  }`}
-                    >
+                  }`}>
                       {detail.head}
                       {isActive && (
                         <div className="absolute right-2 top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-white rounded-full shadow-md group-hover:scale-125 transition-transform duration-300" />
@@ -140,8 +135,7 @@ const ServiceDetails = () => {
               {/* Active Detail Content */}
               <div
                 key={selectedIndex}
-                className="w-full lg:w-3/4 bg-white/60 backdrop-blur-md border border-white/50 p-6 sm:p-8 rounded-xl shadow-xl transition-all duration-500 animate-fade-in"
-              >
+                className="w-full lg:w-3/4 bg-white/60 backdrop-blur-md border border-white/50 p-6 sm:p-8 rounded-xl shadow-xl transition-all duration-500 animate-fade-in">
                 <h3 className="text-xl sm:text-2xl font-semibold text-indigo-800 mb-3 sm:mb-4">
                   {service.details[selectedIndex].head}
                 </h3>
@@ -156,7 +150,6 @@ const ServiceDetails = () => {
 
       <TabSlider />
       <SuggestedServices id={service._id} />
-      
     </>
   );
 };

@@ -35,6 +35,7 @@ const ServiceList = () => {
             data-aos="fade-up">
             {service.imageUrl && (
               <img
+                loading="lazy"
                 src={
                   service.imageUrl.startsWith("http")
                     ? service.imageUrl

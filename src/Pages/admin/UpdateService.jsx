@@ -124,6 +124,7 @@ const UpdateService = () => {
           </label>
           {currentImage && (
             <img
+              loading="lazy"
               src={currentImage}
               alt="Current Service"
               className="mt-2 rounded-lg w-full h-48 object-cover"
@@ -147,6 +148,7 @@ const UpdateService = () => {
           </label>
           {preview && (
             <img
+              loading="lazy"
               src={preview}
               alt="Preview"
               className="mt-4 rounded-lg w-full h-48 object-cover"
@@ -157,8 +159,7 @@ const UpdateService = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
-        >
+          className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300">
           {loading ? "Updating..." : "Update Service"}
         </button>
       </form>

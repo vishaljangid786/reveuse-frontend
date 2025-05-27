@@ -29,7 +29,6 @@ const AllBlog = () => {
       .finally(() => setLoading(false));
   };
 
-
   const handleEditClick = (blog) => {
     setSelectedBlog(blog);
     setFormData({
@@ -104,6 +103,7 @@ const AllBlog = () => {
               className="bg-white shadow-md rounded-xl p-5 space-y-3">
               {blog.imageUrl && (
                 <img
+                  loading="lazy"
                   src={
                     blog.imageUrl.startsWith("http")
                       ? blog.imageUrl

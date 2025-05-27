@@ -4,23 +4,7 @@ import {
   faInfoCircle,
   faBlog,
   faEnvelope,
-  faBars,
-  faXmark,
-  faQuestion,
-  faPlane,
 } from "@fortawesome/free-solid-svg-icons";
-import img1 from "/images/slide1.webp";
-import img2 from "/slider2.jpeg";
-import img3 from "/images/slide3.webp";
-import contact from './aeb332098d3a352c570beecb08b08d3f.webp' 
-import { icon } from "@fortawesome/fontawesome-svg-core";
-
-export {
-  img1,
-  img2,
-  img3
-}
-
 
 export const navLinks = [
   { icon: faHome, label: "Home", link: "/" },
@@ -31,50 +15,19 @@ export const navLinks = [
   { icon: faEnvelope, label: "Contact Us", link: "/contact" },
 ];
 
-export const services = [
-  {
-    title: "Merchant Cash Advance",
-    image: img1,
-  },
-  {
-    title: "Outsource to India",
-    image: img2,
-  },
-  {
-    title: "Virtual Employee Services",
-    image: img3,
-  },
-  {
-    title: "Data Services",
-    image: img3,
-  },
-  {
-    title: "Campaign",
-    image: img1,
-  },
-  {
-    title: "Third Party Service Provider",
-    image: img3,
-  },
-  {
-    title: "Bussiness Process Outsourcing",
-    image: img1,
-  },
-];
-
 export const images = [
   {
-    src: img1,
+    src: "https://res.cloudinary.com/djvxynk2f/image/upload/v1748309429/slide1_wq0ngd.webp",
     title: "SOLVE. DELIVER. EXCEL. Every Time.",
     desc: "Our Consulting and Outsourcing services align with your goals. Driving success, sustaining growth.",
   },
   {
-    src: img2,
+    src: "https://res.cloudinary.com/djvxynk2f/image/upload/v1748309429/slide2_cxuynf.webp",
     title: "Empowering Business Excellence",
     desc: "Experience strategic growth and optimized operations with our customized outsourcing solutions, tailored to drive your business forward.",
   },
   {
-    src: img3,
+    src: "https://res.cloudinary.com/djvxynk2f/image/upload/v1748309427/slide3_d7sp5h.webp",
     title: "Your Business, Our Expertise, a Shared Success Story",
     desc: "",
   },
@@ -108,9 +61,6 @@ export const faqs = [
       "We serve a diverse range of industries, including telecommunications, insurance, healthcare, and more, with specialized services tailored to each sector's unique needs.",
   },
 ];
-
-export const imagesCompanies = [img1, img2, img3, contact];
-
 
 export const features = [
   {

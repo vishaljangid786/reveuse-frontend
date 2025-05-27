@@ -90,12 +90,17 @@ const NewService = () => {
       }
 
       setMessage("Service created successfully!");
-      setFormData({ title: "", description: "", image: null ,details: [
-      { head: "", description: "" },
-      { head: "", description: "" },
-      { head: "", description: "" },
-      { head: "", description: "" },
-    ],});
+      setFormData({
+        title: "",
+        description: "",
+        image: null,
+        details: [
+          { head: "", description: "" },
+          { head: "", description: "" },
+          { head: "", description: "" },
+          { head: "", description: "" },
+        ],
+      });
       setPreview(null);
     } catch (error) {
       setMessage(error.message || "Error creating service. Please try again.");
@@ -180,6 +185,7 @@ const NewService = () => {
           {/* Preview Image */}
           {preview && (
             <img
+              loading="lazy"
               src={preview}
               alt="Preview"
               className="mt-4 rounded-lg w-full h-48 object-cover"

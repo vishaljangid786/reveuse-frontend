@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react'
-
-import img1 from "../assets/founder.webp";
-import img2 from "/Dangi.jpeg";
+import React, { useEffect } from "react";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Heading from './Heading';
+import Heading from "./Heading";
 
 const MeetTeam = () => {
-
-
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -21,7 +16,10 @@ const MeetTeam = () => {
         {/* Founder */}
         <div className="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition">
           <img
-            src={img1}
+            loading="lazy"
+            src={
+              "https://res.cloudinary.com/djvxynk2f/image/upload/v1748310519/founder_aodpn3.webp"
+            }
             alt="Kamlesh Dangi"
             className="w-48 h-48 rounded-full mx-auto mb-4 object-cover"
           />
@@ -32,7 +30,10 @@ const MeetTeam = () => {
         {/* Head of Ops */}
         <div className="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition">
           <img
-            src={img2}
+            loading="lazy"
+            src={
+              "https://res.cloudinary.com/djvxynk2f/image/upload/v1748309376/Dangi_mrjkbv.jpg"
+            }
             alt="R Dangi"
             className="w-48 h-48 rounded-full mx-auto mb-4 object-cover object-top"
           />
@@ -42,6 +43,6 @@ const MeetTeam = () => {
       </div>
     </div>
   );
-}
+};
 
-export default MeetTeam
+export default MeetTeam;

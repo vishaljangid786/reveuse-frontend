@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import Seo from "../components/Seo";
-import ContactImage from "../assets/aeb332098d3a352c570beecb08b08d3f.webp";
 
 const ContactUs = () => {
   const form = useRef();

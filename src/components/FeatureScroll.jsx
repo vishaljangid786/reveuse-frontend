@@ -29,6 +29,7 @@ const FeaturesSlider = () => {
           <SwiperSlide key={index}>
             <div className="flex flex-col items-center text-center p-4 rounded-2xl hover:scale-105 transition-transform duration-500 bg-white shadow-lg group-hover:shadow-2xl">
               <img
+                loading="lazy"
                 src={feature.image}
                 alt={feature.title}
                 className="h-40 w-full object-cover rounded-lg mb-3 sm:h-48 md:h-52 lg:h-56"

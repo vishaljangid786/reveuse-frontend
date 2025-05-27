@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { img1 } from "../assets/assets"; // Update with the correct image path
 
@@ -12,6 +11,7 @@ const Testimonial = () => {
       {/* Image section */}
       <div className="flex justify-center mb-6">
         <img
+          loading="lazy"
           src={img1} // Update path to your image
           alt="Frankie B."
           className="w-52 h-52 object-cover rounded-full border-2 border-gray-200 hover:border-indigo-500 transition duration-300 ease-in-out"

@@ -5,7 +5,6 @@ import HomeContact from "../components/HomeContact";
 import Heading from "../components/Heading";
 import Seo from "../components/Seo";
 import MeetTeam from "../components/MeetTeam";
-import img7 from "../assets/img9.webp"; // Replace with actual image import
 
 const Aboutus = () => {
   useEffect(() => {
@@ -47,7 +46,10 @@ const Aboutus = () => {
         {/* Banner Image */}
         <div className="mb-16" data-aos="zoom-in">
           <img
-            src={img7}
+            loading="lazy"
+            src={
+              "https://res.cloudinary.com/djvxynk2f/image/upload/v1748309287/img9_apuxak.webp"
+            }
             alt="About Reveuse"
             className="w-full h-[500px] object-cover rounded-xl shadow-md"
           />

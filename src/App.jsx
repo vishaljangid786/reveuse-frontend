@@ -17,11 +17,23 @@ import NewService from "./Pages/admin/NewService.jsx";
 import ServiceDetails from "./Pages/ServiceDetails.jsx";
 import { HelmetProvider } from "react-helmet-async";
 import FAQ from "./components/FAQ.jsx";
+import Lenis from 'lenis'
 
 // export const backendurl = "http://localhost:5000";
 export const backendurl = "https://thereveuse.com";
 
 const App = () => {
+
+  const lenis = new Lenis();
+
+  // Use requestAnimationFrame to continuously update the scroll
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

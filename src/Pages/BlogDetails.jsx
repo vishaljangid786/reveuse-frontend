@@ -3,11 +3,10 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { backendurl } from "../App";
 import EmojiPicker from "emoji-picker-react";
-import { formatDistanceToNow } from "date-fns"; 
+import { formatDistanceToNow } from "date-fns";
 import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
 import Seo from "../components/Seo";
-
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -33,7 +32,6 @@ const BlogDetails = () => {
       setNotFound(true); // Set not found on error
     }
   };
-
 
   useEffect(() => {
     // Update view count on backend each time the page is loaded or reloaded
@@ -118,11 +116,8 @@ const BlogDetails = () => {
   }
 
   if (!blog) {
-    return (
-      <Loader />
-    );
+    return <Loader />;
   }
-
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10 space-y-6">
@@ -143,6 +138,7 @@ const BlogDetails = () => {
       {blog.imageUrl && (
         <div className="relative group">
           <img
+            loading="lazy"
             src={
               blog.imageUrl.startsWith("http")
                 ? blog.imageUrl
@@ -250,6 +246,7 @@ const BlogDetails = () => {
             {commentImage && (
               <div className="relative w-20 h-20">
                 <img
+                  loading="lazy"
                   src={URL.createObjectURL(commentImage)}
                   alt="Preview"
                   className="rounded-md w-full h-full object-cover border"
@@ -284,6 +281,7 @@ const BlogDetails = () => {
         <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center">
           <div className="relative max-w-6xl w-full mx-4">
             <img
+              loading="lazy"
               src={fullscreenImage}
               alt="Full"
               className="w-full max-h-[90vh] object-contain rounded-lg"

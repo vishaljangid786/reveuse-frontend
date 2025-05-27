@@ -6,7 +6,6 @@ import { services } from "../assets/assets";
 import { div } from "framer-motion/client";
 import Heading from "./Heading";
 
-
 const HomeServices = () => {
   return (
     <div>
@@ -20,6 +19,7 @@ const HomeServices = () => {
               className="group block w-[400px] bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300">
               <div className="overflow-hidden">
                 <img
+                  loading="lazy"
                   src={service.image}
                   alt={service.title}
                   className="w-full h-60 object-cover transform group-hover:scale-105 transition duration-300"

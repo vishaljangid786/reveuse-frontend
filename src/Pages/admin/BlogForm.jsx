@@ -165,6 +165,7 @@ const BlogForm = () => {
 
           {preview && (
             <img
+              loading="lazy"
               src={preview}
               alt="Preview"
               className="mt-4 rounded-lg w-full h-48 object-cover"

@@ -1,5 +1,4 @@
 import React from "react";
-import img1 from "../assets/homeabout.webp";
 import Heading from "./Heading";
 import { Link } from "react-router-dom";
 
@@ -8,7 +7,7 @@ const HomeAbout = () => {
     <div
       className="relative w-full min-h-[100vh] bg-cover bg-center bg-fixed flex items-center justify-center text-white px-4 py-10 md:py-20"
       style={{
-        backgroundImage: `url(${img1})`,
+        backgroundImage: `url(${"https://res.cloudinary.com/djvxynk2f/image/upload/v1748309284/homeabout_mnigmi.webp"})`,
       }}>
       {/* Overlay */}
       <div className="absolute inset-0 bg-black opacity-60 z-0" />

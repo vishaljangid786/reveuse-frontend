@@ -90,7 +90,7 @@ const AllServices = () => {
       setEditingService(null);
     } catch (err) {
       alert("Failed to update service.");
-    }finally{
+    } finally {
       setUpdating(false);
     }
   };
@@ -111,6 +111,7 @@ const AllServices = () => {
               className="bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transition duration-300">
               {service.imageUrl && (
                 <img
+                  loading="lazy"
                   src={service.imageUrl}
                   alt={service.title}
                   className="w-full h-48 object-cover"

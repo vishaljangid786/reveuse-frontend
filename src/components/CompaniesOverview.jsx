@@ -14,22 +14,20 @@ const CompaniesOverview = () => {
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState("");
 
-const fetchServices = async () => {
-  setLoading(true);
-  try {
-    const res = await axios.get(`${backendurl}/api/services`);
-    // Reverse the array to get descending order and take the first 6 items
-    const latestSix = res.data.slice().reverse().slice(0, 6);
-    setServices(latestSix);
-  } catch (err) {
-    console.error("Failed to fetch:", err);
-    setError("Failed to load services.");
-  } finally {
-    setLoading(false);
-  }
-};
-
-
+  const fetchServices = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(`${backendurl}/api/services`);
+      // Reverse the array to get descending order and take the first 6 items
+      const latestSix = res.data.slice().reverse().slice(0, 6);
+      setServices(latestSix);
+    } catch (err) {
+      console.error("Failed to fetch:", err);
+      setError("Failed to load services.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     fetchServices(page);
@@ -62,6 +60,7 @@ const fetchServices = async () => {
             transition={{ duration: 0.6, ease: "easeInOut" }}>
             <Link to="/services">
               <img
+                loading="lazy"
                 src={service.imageUrl}
                 alt={`Service ${index + 1}`}
                 className="h-64 w-full object-cover"
