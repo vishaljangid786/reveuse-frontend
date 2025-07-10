@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { backendurl } from "../App";
-import EmojiPicker from "emoji-picker-react";
 import { formatDistanceToNow } from "date-fns";
 import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
-import Seo from "../components/Seo";
 
 const BlogDetails = () => {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [commentText, setCommentText] = useState("");
-  const [showEmoji, setShowEmoji] = useState(false);
   const [commentImage, setCommentImage] = useState(null);
   const [hasLiked, setHasLiked] = useState(false);
   const [notFound, setNotFound] = useState(false);
@@ -21,9 +17,10 @@ const BlogDetails = () => {
 
   const fetchBlog = async () => {
     try {
-      const res = await axios.get(`${backendurl}/api/blogs/${id}`);
-      if (res.data) {
-        setBlog(res.data);
+      const res = await fetch(`${backendurl}/api/blogs/${id}`);
+      if (res.ok) {
+        const data = await res.json();
+        setBlog(data);
       } else {
         setNotFound(true);
       }
@@ -34,50 +31,35 @@ const BlogDetails = () => {
   };
 
   useEffect(() => {
-    // Update view count on backend each time the page is loaded or reloaded
-    axios
-      .put(`${backendurl}/api/blogs/${id}/view`)
-      .then((response) => {
+    const updateViewCount = async () => {
+      try {
+        await fetch(`${backendurl}/api/blogs/${id}/view`, {
+          method: "PUT",
+        });
         fetchBlog(); // Refresh the blog data after updating the view count
-      })
-      .catch((err) => {
+      } catch (err) {
         console.log("Error updating view count:", err);
-      });
+      }
+    };
+    updateViewCount();
   }, [id]);
 
-  const handleLike = () => {
+  const handleLike = async () => {
     const token = localStorage.getItem("token");
+    const url = `${backendurl}/api/blogs/${id}/${hasLiked ? "unlike" : "like"}`;
+    const method = hasLiked ? "PUT" : "POST";
 
-    if (!hasLiked) {
-      // Like the blog
-      axios
-        .put(
-          `${backendurl}/api/blogs/${id}/like`,
-          {},
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
-        .then(() => {
-          setHasLiked(true); // Update state to show the liked state
-          fetchBlog(); // Refresh blog data if necessary
-        })
-        .catch((err) => console.log(err));
-    } else {
-      // Un-like the blog
-      axios
-        .put(
-          `${backendurl}/api/blogs/${id}/unlike`,
-          {},
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
-        .then(() => {
-          setHasLiked(false); // Update state to show unliked state
-          fetchBlog(); // Refresh blog data if necessary
-        })
-        .catch((err) => console.log(err));
+    try {
+      const res = await fetch(url, {
+        method: method,
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) {
+        setHasLiked(!hasLiked);
+        fetchBlog();
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -88,23 +70,23 @@ const BlogDetails = () => {
     if (commentImage) formData.append("image", commentImage);
     const token = localStorage.getItem("token");
 
-    axios
-      .post(`${backendurl}/api/blogs/${id}/comments`, formData, {
+    try {
+      const res = await fetch(`${backendurl}/api/blogs/${id}/comments`, {
+        method: "POST",
         headers: {
-          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
-      })
-      .then(() => {
+        body: formData,
+      });
+
+      if (res.ok) {
         setCommentText("");
         setCommentImage(null);
         fetchBlog();
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const handleEmojiClick = (emojiData) => {
-    setCommentText((prev) => prev + emojiData.emoji);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   if (notFound) {
@@ -121,14 +103,6 @@ const BlogDetails = () => {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10 space-y-6">
-      <Seo
-        title={`${blog.title} – Reveuse Blog`}
-        description={blog.summary || blog.content.slice(0, 150)}
-        keywords={blog.tags?.join(", ")}
-        url={`https://www.thereveuse.com/blogs/${blog._id}`}
-        image={blog.thumbnail}
-      />
-
       <button
         onClick={() => navigate(-1)}
         className="mb-4 text-blue-600 hover:underline">
@@ -234,13 +208,19 @@ const BlogDetails = () => {
               />
             </label>
 
-            {/* Emoji Toggle Button */}
-            <button
-              type="button"
-              onClick={() => setShowEmoji(!showEmoji)}
-              className="text-sm cursor-pointer text-blue-600 hover:underline">
-              {showEmoji ? "Hide Emojis" : "Add Emoji 😄"}
-            </button>
+            {/* Optional Quick Emojis */}
+            <div className="flex flex-wrap gap-2 text-lg">
+              {["😀", "😂", "😍", "👍", "🔥", "💯"].map((emoji) => (
+                <button
+                  key={emoji}
+                  type="button"
+                  onClick={() => setCommentText((prev) => prev + emoji)}
+                  className="hover:scale-110 transition text-xl"
+                  title="Insert emoji">
+                  {emoji}
+                </button>
+              ))}
+            </div>
 
             {/* Preview Selected Image */}
             {commentImage && (
@@ -261,13 +241,6 @@ const BlogDetails = () => {
               </div>
             )}
           </div>
-
-          {/* Emoji Picker */}
-          {showEmoji && (
-            <div className="w-fit border rounded-md p-2">
-              <EmojiPicker onEmojiClick={handleEmojiClick} />
-            </div>
-          )}
 
           {/* Submit Button */}
           <button

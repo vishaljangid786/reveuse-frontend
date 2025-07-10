@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { images } from "../assets/assets";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const ImageSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -42,8 +41,7 @@ const ImageSlider = () => {
         <motion.div
           className="flex h-full w-full"
           animate={{ x: `-${currentIndex * 100}%` }}
-          transition={{ type: "tween", ease: "easeInOut", duration: 0.8 }}
-        >
+          transition={{ type: "tween", ease: "easeInOut", duration: 0.8 }}>
           {images.map((img, index) => (
             <div key={index} className="min-w-full h-full relative">
               <motion.img
@@ -73,15 +71,13 @@ const ImageSlider = () => {
         {/* Arrows */}
         <button
           onClick={() => handleArrowClick(-1)}
-          className="absolute top-1/2 left-4 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full z-10 hover:bg-black/80 transition-all"
-        >
-          <ChevronLeft size={24} />
+          className="absolute top-1/2 left-4 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full z-10 hover:bg-black/80 transition-all">
+          <i className="fa-solid fa-angle-left"></i>
         </button>
         <button
           onClick={() => handleArrowClick(1)}
-          className="absolute top-1/2 right-4 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full z-10 hover:bg-black/80 transition-all"
-        >
-          <ChevronRight size={24} />
+          className="absolute top-1/2 right-4 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full z-10 hover:bg-black/80 transition-all">
+          <i className="fa-solid fa-angle-right"></i>
         </button>
       </div>
 

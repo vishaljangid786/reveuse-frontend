@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { backendurl } from "../App";
 import { Link } from "react-router-dom";
-import AOS from "aos";
 
 const ServiceList = () => {
   const [services, setServices] = useState([]);
@@ -12,15 +10,19 @@ const ServiceList = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const res = await axios.get(`${backendurl}/api/services`);
-        setServices(res.data);
+        const res = await fetch(`${backendurl}/api/services`);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const data = await res.json();
+
+        setServices(data);
       } catch (err) {
-        console.error("Error fetching services");
+        console.error("Error fetching services:", err);
       }
     };
 
     fetchServices();
-    AOS.init({ duration: 1000, once: true });
   }, []);
 
   return (
@@ -31,8 +33,7 @@ const ServiceList = () => {
           <Link
             to={`/services/${service._id}`}
             key={service._id}
-            className="bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl group"
-            data-aos="fade-up">
+            className="bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl group">
             {service.imageUrl && (
               <img
                 loading="lazy"

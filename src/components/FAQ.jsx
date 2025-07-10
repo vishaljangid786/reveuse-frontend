@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
 import { faqs } from "../assets/assets";
 import Heading from "./Heading";
 import HomeContact from "./HomeContact";
@@ -22,25 +21,21 @@ const FAQ = () => {
             return (
               <div
                 key={index}
-                className={`bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden transition-all duration-300 `}
-              >
+                className={`bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden transition-all duration-300 `}>
                 <button
                   onClick={() => toggle(index)}
-                  className="w-full flex justify-between items-center px-6 py-4 text-left text-lg font-medium focus:outline-none"
-                >
+                  className="w-full flex justify-between items-center px-6 py-4 text-left text-lg font-medium focus:outline-none">
                   <span
                     className={`${
                       isOpen ? "text-blue-600" : "text-gray-800"
-                    } transition-colors mulish duration-300`}
-                  >
+                    } transition-colors mulish duration-300`}>
                     {faq.question}
                   </span>
                   <span
                     className={`transition-transform duration-300 ${
                       isOpen ? "rotate-180" : ""
-                    }`}
-                  >
-                    <ChevronDown />
+                    }`}>
+                    <i className="fa-solid fa-angle-up"></i>
                   </span>
                 </button>
                 <div
@@ -48,8 +43,7 @@ const FAQ = () => {
                     isOpen
                       ? "max-h-60 opacity-100 py-4"
                       : "max-h-0 opacity-0 py-0"
-                  } overflow-hidden text-gray-600`}
-                >
+                  } overflow-hidden text-gray-600`}>
                   <p className="transition-opacity mulish duration-300">
                     {faq.answer}
                   </p>

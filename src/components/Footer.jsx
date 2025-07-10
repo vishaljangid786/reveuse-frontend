@@ -1,9 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faXTwitter,
-  faInstagram,
-  faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -13,7 +7,6 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 text-center sm:text-left py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         {/* Logo & Description */}
         <div>
-          {/* <div className="flex items-center sm:justify-left  justify-center gap-3 mb-4"> */}
           <img
             loading="lazy"
             src="https://res.cloudinary.com/djvxynk2f/image/upload/v1748309439/dark2_plsxqn.png"
@@ -23,7 +16,6 @@ export default function Footer() {
           <h2 className="text-xl font-bold leading-tight">
             The RÊVEUSE Solution
           </h2>
-          {/* </div> */}
           <p className="text-sm text-gray-400">
             Empowering Your Digital Dreams
           </p>
@@ -86,20 +78,25 @@ export default function Footer() {
               href="https://x.com/TheRevesuse?t=e-z6s6mesftsPdZby7PVcw&s=09"
               aria-label="X"
               target="_blank"
+              rel="noopener noreferrer"
               className="hover:text-blue-300">
-              <FontAwesomeIcon icon={faXTwitter} />
+              <i className="fab fa-x-twitter"></i>
             </a>
             <a
               href="https://www.instagram.com/the.reveusesolution?igsh=ZXJ0aXVzYmRhZ2Nv"
               aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:text-pink-400">
-              <FontAwesomeIcon icon={faInstagram} />
+              <i className="fab fa-instagram"></i>
             </a>
             <a
               href="https://www.linkedin.com/in/kamlesh-dangi-749a84276?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
               aria-label="LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:text-blue-500">
-              <FontAwesomeIcon icon={faLinkedin} />
+              <i className="fab fa-linkedin"></i>
             </a>
           </div>
         </div>

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLocation } from "react-router-dom";
-import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { navLinks } from "../assets/assets";
 
 const Navbar = () => {
@@ -30,8 +28,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div
-      className={`bg-white shadow-md  py-2 px-0 sm:px-10 sticky w-full top-0 z-50 transition-transform duration-300 ease-in-out `}>
+    <div className="bg-white shadow-md py-2 px-0 sm:px-10 sticky w-full top-0 z-50 transition-transform duration-300 ease-in-out">
       <div className="flex justify-between items-center">
         <Link to="/">
           <img
@@ -59,11 +56,10 @@ const Navbar = () => {
                 }`}>
                 <div className="flex items-center gap-2">
                   <div className="lg:block hidden">
-                    {item.icon && <FontAwesomeIcon icon={item.icon} />}
+                    {item.icon && <i className={item.icon}></i>}
                   </div>
                   <span>{item.label}</span>
                 </div>
-
                 {item.label !== "Contact Us" && (
                   <span
                     className={`absolute rounded-full left-0 -bottom-1 h-[2px] w-full origin-left scale-x-0 bg-blue-600 transition-transform duration-300 group-hover:scale-x-100 ${
@@ -74,7 +70,7 @@ const Navbar = () => {
             );
           })}
 
-          {/* 👇 Admin link */}
+          {/* Admin link */}
           {hasToken && (
             <Link
               to="/admin/createblog"
@@ -82,8 +78,6 @@ const Navbar = () => {
               <span className="relative z-10">
                 <i className="fa-solid fa-user"></i>
               </span>
-              <span className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-100 transition duration-300 rounded-lg"></span>
-              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
             </Link>
           )}
         </ul>
@@ -93,7 +87,10 @@ const Navbar = () => {
           <button
             onClick={toggleMobileMenu}
             className="text-3xl text-gray-700 focus:outline-none">
-            <FontAwesomeIcon icon={isMobileMenuOpen ? faXmark : faBars} />
+            <i
+              className={`fa-solid ${
+                isMobileMenuOpen ? "fa-xmark" : "fa-bars"
+              }`}></i>
           </button>
         </div>
       </div>
@@ -111,7 +108,7 @@ const Navbar = () => {
               <Link to={item.link} key={index}>
                 {item.label === "Contact Us" ? (
                   <li className="flex w-2/3 mt-5 justify-center items-center gap-3 text-white border-2 border-blue-500 bg-blue-500 rounded-full px-8 py-3 mx-auto transition-all duration-300 hover:bg-white hover:text-blue-500">
-                    {item.icon && <FontAwesomeIcon icon={item.icon} />}
+                    {item.icon && <i className={item.icon}></i>}
                     <span>{item.label}</span>
                   </li>
                 ) : (
@@ -121,7 +118,7 @@ const Navbar = () => {
                         ? "text-blue-600 pb-2 px-4 border-b font-bold"
                         : "hover:text-blue-600 px-2 py-2 transition-all duration-300 cursor-pointer"
                     }`}>
-                    {item.icon && <FontAwesomeIcon icon={item.icon} />}
+                    {item.icon && <i className={item.icon}></i>}
                     <span>{item.label}</span>
                   </li>
                 )}
@@ -132,7 +129,7 @@ const Navbar = () => {
           {/* Admin in Mobile */}
           {hasToken && (
             <Link to="/admin">
-              <li className="flex bg-transparent w-fit mx-auto text-blue-500 border-2 border-blue-500 hover:bg-blue-500 hover:text-white rounded px-10 items-center gap-3 py-2  transition-all duration-300 cursor-pointer">
+              <li className="flex bg-transparent w-fit mx-auto text-blue-500 border-2 border-blue-500 hover:bg-blue-500 hover:text-white rounded px-10 items-center gap-3 py-2 transition-all duration-300 cursor-pointer">
                 <i className="fa-solid fa-user"></i>
                 Admin
               </li>

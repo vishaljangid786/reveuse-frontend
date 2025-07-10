@@ -1,20 +1,11 @@
-import {
-  faHome,
-  faCogs,
-  faInfoCircle,
-  faBlog,
-  faEnvelope,
-} from "@fortawesome/free-solid-svg-icons";
-
 export const navLinks = [
-  { icon: faHome, label: "Home", link: "/" },
-  { icon: faCogs, label: "Services", link: "/services" },
-  { icon: faInfoCircle, label: "About Us", link: "/about" },
-  { icon: faBlog, label: "Blog", link: "/blog" },
-  {  label: "FAQ", link: "/faq"},
-  { icon: faEnvelope, label: "Contact Us", link: "/contact" },
+  { iconClass: "fas fa-home", label: "Home", link: "/" },
+  { iconClass: "fas fa-cogs", label: "Services", link: "/services" },
+  { iconClass: "fas fa-info-circle", label: "About Us", link: "/about" },
+  { iconClass: "fas fa-blog", label: "Blog", link: "/blog" },
+  { label: "FAQ", link: "/faq" },
+  { iconClass: "fas fa-envelope", label: "Contact Us", link: "/contact" },
 ];
-
 export const images = [
   {
     src: "https://res.cloudinary.com/djvxynk2f/image/upload/v1748309429/slide1_wq0ngd.webp",
@@ -60,6 +51,56 @@ export const faqs = [
     answer:
       "We serve a diverse range of industries, including telecommunications, insurance, healthcare, and more, with specialized services tailored to each sector's unique needs.",
   },
+  {
+    question:
+      "What makes Reveuse Solution different from other BPO service providers?",
+    answer:
+      "Reveuse Solution stands out due to its commitment to quality, customized outsourcing strategies, and a client-first approach. We blend advanced technology with skilled professionals to deliver reliable, scalable, and efficient solutions tailored to each client’s unique business goals",
+  },
+  {
+    question: "Can Reveuse Solution scale services based on business needs?",
+    answer:
+      "Yes. Our solutions are designed to be flexible and scalable. Whether your business is expanding or requires seasonal support, we adapt quickly to your changing needs without compromising on quality or turnaround time.",
+  },
+  {
+    question: "What is the onboarding process for new clients?",
+    answer:
+      "Our onboarding process includes a detailed needs assessment, solution design, knowledge transfer, process training, and a trial phase to ensure seamless transition. We work closely with clients at every step for smooth integration and high performance from day one",
+  },
+  {
+    question: "What are the working hours of Reveuse Solution’s support teams?",
+    answer:
+      "We serve a diverse range of industries, including telecommunications, insurance, healthcare, and more, with specialized services tailored to each sector's unique needs.",
+  },
+  {
+    question:
+      "How does Reveuse Solution handle data privacy compliance (e.g., GDPR)?",
+    answer:
+      "We serve a diverse range of industries, including telecommunications, insurance, healthcare, and more, with specialized services tailored to each sector's unique needs.",
+  },
+  {
+    question: "Can I get a demo or trial of your services?",
+    answer:
+      "Absolutely. We offer service demos and pilot projects to give potential clients a hands-on experience of our capabilities. This helps build trust and allows us to showcase our approach before a full engagement.",
+  },
+  {
+    question:
+      "What types of businesses benefit most from partnering with Reveuse Solution?",
+    answer:
+      " We serve startups, mid-size enterprises, and large corporations across various sectors including e-commerce, healthcare, finance, telecom, logistics, and more. Any business seeking efficiency, cost reduction, and service quality can benefit from our outsourcing solutions.",
+  },
+  {
+    question:
+      "How does Reveuse Solution manage client communication and reporting?",
+    answer:
+      " We maintain transparent and consistent communication through dedicated account managers, regular performance reports, and scheduled review meetings. Our goal is to keep clients informed, involved, and confident in our service delivery.",
+  },
+  {
+    question:
+      "Is Reveuse Solution experienced in handling high-volume operations?",
+    answer:
+      " Yes. We have extensive experience managing high-volume projects across multiple domains. Our robust infrastructure, trained staff, and process optimization capabilities enable us to handle large-scale operations with precision and speed.",
+  },
 ];
 
 export const features = [
@@ -104,4 +145,3 @@ export const features = [
     title: "Advanced Technologies",
   },
 ];
-

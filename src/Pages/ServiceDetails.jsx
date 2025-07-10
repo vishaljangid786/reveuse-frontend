@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { backendurl } from "../App";
 import Heading from "../components/Heading";
-import Seo from "../components/Seo";
 import TabSlider from "../components/TabSlider";
 import SuggestedServices from "../components/SuggestedServices.jsx";
 
@@ -19,10 +17,14 @@ const ServiceDetails = () => {
   useEffect(() => {
     const fetchService = async () => {
       try {
-        const res = await axios.get(`${backendurl}/api/services/${id}`);
-        setService(res.data);
+        const res = await fetch(`${backendurl}/api/services/${id}`);
+        if (!res.ok) {
+          throw new Error("Failed to load service");
+        }
+        const data = await res.json();
+        setService(data);
       } catch (err) {
-        setError(err.response?.data?.error || "Failed to load service");
+        setError(err.message || "Failed to load service");
       } finally {
         setLoading(false);
       }
@@ -47,13 +49,6 @@ const ServiceDetails = () => {
   return (
     <>
       <div className="max-w-4xl mx-auto px-4 py-10">
-        <Seo
-          title={`${service.title} – Service by Reveuse Solutions`}
-          description={service.description.slice(0, 150)}
-          keywords={`${service.name}, IT services, Reveuse`}
-          url={`https://www.thereveuse.com/services/${service._id}`}
-        />
-
         <Heading text1={"Service"} text2={"Details"} />
 
         <button

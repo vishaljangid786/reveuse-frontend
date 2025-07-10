@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import Heading from "../../components/Heading";
 import { backendurl } from "../../App";
 
@@ -73,23 +72,29 @@ const BlogForm = () => {
     }
 
     try {
-      const response = await axios.post(`${backendurl}/api/blogs`, data, {
+      const response = await fetch(`${backendurl}/api/blogs`, {
+        method: "POST",
         headers: {
-          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
-        withCredentials: true,
+        body: data,
       });
 
-      if (response.status === 201) {
-        setMessage("Blog created successfully!");
-        setFormData({ title: "", content: "", image: null });
-        setPreview(null);
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({
+          error: "Failed to create blog and could not parse error response.",
+        }));
+        throw new Error(
+          errorData.error || "Failed to create blog. Please try again."
+        );
       }
+
+      const result = await response.json();
+      setMessage("Blog created successfully!");
+      setFormData({ title: "", content: "", image: null });
+      setPreview(null);
     } catch (err) {
-      setMessage(
-        err.response?.data?.error || "Failed to create blog. Please try again."
-      );
+      setMessage(err.message || "Failed to create blog. Please try again.");
       console.error("Error creating blog:", err);
     } finally {
       setLoading(false);

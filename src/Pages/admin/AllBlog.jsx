@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { backendurl } from "../../App";
 import Heading from "../../components/Heading";
 import Loader from "../../components/Loader";
@@ -20,13 +19,20 @@ const AllBlog = () => {
     fetchBlogs();
   }, []);
 
-  const fetchBlogs = () => {
+  const fetchBlogs = async () => {
     setLoading(true);
-    axios
-      .get(`${backendurl}/api/blogs`)
-      .then((res) => setBlogs(res.data))
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false));
+    try {
+      const res = await fetch(`${backendurl}/api/blogs`);
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      const data = await res.json();
+      setBlogs(data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleEditClick = (blog) => {
@@ -40,15 +46,16 @@ const AllBlog = () => {
   };
 
   const handleDeleteClick = (blog) => {
-    // Confirm delete action
     const confirmed = window.confirm(
       "Are you sure you want to delete this blog?"
     );
     if (confirmed) {
-      axios
-        .delete(`${backendurl}/api/blogs/${blog._id}`)
-        .then(() => {
-          fetchBlogs(); // Refresh the list of blogs after deletion
+      fetch(`${backendurl}/api/blogs/${blog._id}`, {
+        method: "DELETE",
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Delete failed");
+          fetchBlogs();
         })
         .catch((err) => {
           console.error("Delete error:", err);
@@ -62,20 +69,22 @@ const AllBlog = () => {
     const updatedFormData = new FormData();
     updatedFormData.append("title", formData.title);
     updatedFormData.append("content", formData.content);
-    updatedFormData.append("imageUrl", formData.imageUrl); // old image
+    updatedFormData.append("imageUrl", formData.imageUrl);
     if (formData.newImageFile) {
-      updatedFormData.append("image", formData.newImageFile); // new file
+      updatedFormData.append("image", formData.newImageFile);
     }
 
-    axios
-      .put(`${backendurl}/api/blogs/${selectedBlog._id}`, updatedFormData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+    fetch(`${backendurl}/api/blogs/${selectedBlog._id}`, {
+      method: "PUT",
+      body: updatedFormData,
+    })
       .then((res) => {
-        fetchBlogs(); // refresh blog list
-        setIsModalOpen(false); // close modal
+        if (!res.ok) throw new Error("Update failed");
+        return res.json();
+      })
+      .then(() => {
+        fetchBlogs();
+        setIsModalOpen(false);
         setFormData({ title: "", content: "", imageUrl: "" });
         setSelectedBlog(null);
       })

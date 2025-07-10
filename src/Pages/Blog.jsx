@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { backendurl } from "../App";
 import Heading from "../components/Heading";
-import AOS from "aos";
-import "aos/dist/aos.css"; // AOS styles
 import Loader from "../components/Loader"; // ← Import the Loader component
-import Seo from "../components/Seo";
 import HomeContact from "../components/HomeContact";
 
 const Blog = () => {
@@ -16,17 +12,22 @@ const Blog = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`${backendurl}/api/blogs`)
-      .then((res) => {
-        setBlogs(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await fetch(`${backendurl}/api/blogs`);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const data = await res.json();
+        setBlogs(data);
+      } catch (err) {
         console.log(err);
+      } finally {
         setLoading(false);
-      });
-    AOS.init({ duration: 1000, once: true });
+      }
+    };
+
+    fetchBlogs();
   }, []);
 
   const filteredBlogs = blogs.filter((blog) =>
@@ -36,15 +37,7 @@ const Blog = () => {
   return (
     <>
       <div className="max-w-6xl min-h-screen mx-auto px-4 py-10">
-        <Seo
-          title="Blog – Reveuse Solutions | Tech Insights & How-Tos"
-          description="Read articles on trending tech topics, tutorials, and industry insights from the team at Reveuse Solutions."
-          keywords="tech blog, development articles, programming, software tutorials, IT trends"
-          url="https://www.thereveuse.com/blog"
-          image="https://www.thereveuse.com/assets/blog.jpg"
-        />
-
-        <div data-aos="zoom-in">
+        <div>
           <Heading text1="All" text2="Blogs" />
         </div>
 
@@ -53,7 +46,6 @@ const Blog = () => {
             type="text"
             placeholder="Search blogs..."
             value={searchTerm}
-            data-aos="fade-left"
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full sm:w-72 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -66,7 +58,6 @@ const Blog = () => {
             {filteredBlogs.map((blog) => (
               <div
                 key={blog._id}
-                data-aos="fade-up"
                 className="bg-white shadow-md hover:shadow-xl transition-shadow transio duration-300 rounded-xl p-5 space-y-4 transform hover:scale-[1.05] hover:border-blue-500 border border-transparent hover:border">
                 {blog.imageUrl && (
                   <img

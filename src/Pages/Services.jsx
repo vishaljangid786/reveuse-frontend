@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Seo from "../components/Seo";
 import Heading from "../components/Heading";
-import axios from "axios";
-import AOS from "aos";
 import { backendurl } from "../App";
 import { Link } from "react-router-dom";
 import HomeContact from "../components/HomeContact";
+import Loader from "../components/Loader";
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -14,15 +12,18 @@ const Services = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const res = await axios.get(`${backendurl}/api/services`);
-        setServices(res.data);
+        const res = await fetch(`${backendurl}/api/services`);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const data = await res.json();
+        setServices(data);
       } catch (err) {
-        console.error("Error fetching services");
+        console.error("Error fetching services:", err);
       }
     };
 
     fetchServices();
-    AOS.init({ duration: 1000, once: true });
   }, []);
 
   const filteredServices = services.filter((service) =>
@@ -32,21 +33,13 @@ const Services = () => {
   return (
     <>
       <div className="max-w-6xl mx-auto px-4 py-10">
-        <Seo
-          title="Services – Reveuse Solutions | Custom Web & App Development"
-          description="Check out our professional services including web development, mobile apps, cloud solutions, and digital consulting."
-          keywords="web development, IT services, cloud consulting, app development, digital solutions"
-          url="https://www.thereveuse.com/services"
-          image="https://www.thereveuse.com/assets/services.jpg"
-        />
-        <div data-aos="zoom-in">
+        <div>
           <Heading text1={"All"} text2={"Services"} />
         </div>
         <div className="mb-6 flex justify-end">
           <input
             type="text"
             placeholder="Search services..."
-            data-aos="fade-left"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full sm:w-72 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -59,8 +52,7 @@ const Services = () => {
               <Link
                 to={`/services/${service._id}`}
                 key={service._id}
-                className="bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl group"
-                data-aos="fade-up">
+                className="bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl group">
                 {service.imageUrl && (
                   <img
                     loading="lazy"
@@ -84,9 +76,7 @@ const Services = () => {
               </Link>
             ))
           ) : (
-            <p className="text-center w-full col-span-full">
-              No services found.
-            </p>
+            <Loader />
           )}
         </div>
       </div>

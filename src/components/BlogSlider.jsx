@@ -38,19 +38,31 @@ const steps = [
   },
 ];
 
-
-
 const BlogSlider = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const [isSwiperReady, setIsSwiperReady] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef(null);
+
+  // Intersection Observer to detect if component is in viewport
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => {
+      if (containerRef.current) observer.unobserve(containerRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     setIsSwiperReady(true);
   }, []);
 
   return (
-    <div className="overflow-hidden">
+    <div ref={containerRef} className="overflow-hidden">
       <Heading text1="HOW TO START WITH" text2="THE REVEUSE SOLUTION" />
       <div className="relative max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         {isSwiperReady && (
@@ -59,10 +71,14 @@ const BlogSlider = () => {
             loop={true}
             slidesPerView={1}
             spaceBetween={20}
-            autoplay={{
-              delay: 5000,
-              disableOnInteraction: false,
-            }}
+            autoplay={
+              isVisible
+                ? {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                  }
+                : false
+            }
             breakpoints={{
               640: { slidesPerView: 1 },
               768: { slidesPerView: 2 },
@@ -77,18 +93,30 @@ const BlogSlider = () => {
               swiper.params.navigation.nextEl = nextRef.current;
               swiper.navigation.init();
               swiper.navigation.update();
-            }}
-          >
+            }}>
             {steps.map((step, index) => (
               <SwiperSlide key={index}>
-                <div className="bg-gray-100 p-8 rounded-xl text-center mulish hover:shadow-lg transition">
-                  <div className="text-4xl mb-4">{step.icon}</div>
-                  <h3 className="text-xl font-semibold mb-2">{step.step}</h3>
-                  <h2 className="text-2xl font-bold mb-4">{step.title}</h2>
-                  <p className="text-gray-600 mb-6">{step.desc}</p>
-                  <Link to="/about" className="text-blue-500 hover:underline">
-                    Read More
-                  </Link>
+                <div className="h-full">
+                  <div className="bg-gray-100 h-full flex flex-col justify-between p-8 rounded-xl text-center mulish hover:shadow-lg transition duration-300">
+                    <div>
+                      <div className="text-4xl mb-4">{step.icon}</div>
+                      <h3 className="text-xl font-semibold mb-2">
+                        {step.step}
+                      </h3>
+                      <h2 className="text-2xl font-bold mb-4 leading-snug min-h-[60px]">
+                        {step.title}
+                      </h2>
+                      <p className="text-gray-600 text-sm leading-relaxed min-h-[96px]">
+                        {step.desc.split(" ").slice(0, 18).join(" ")}
+                        {step.desc.split(" ").length > 18 ? "..." : ""}
+                      </p>
+                    </div>
+                    <Link
+                      to="/about"
+                      className="text-blue-500 font-medium text-sm hover:underline mt-auto">
+                      Read More
+                    </Link>
+                  </div>
                 </div>
               </SwiperSlide>
             ))}

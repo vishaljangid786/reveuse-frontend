@@ -5,7 +5,7 @@ const Heading = ({ text1, text2,toggle }) => {
     <div className="text-center my-10 px-4">
       <h2 className="text-3xl cursor-pointer md:text-4xl lg:text-5xl font-extrabold relative inline-block group tracking-tight">
         <span className="text-blue-600">{text1}</span>{" "}
-        <span className="text-gray-800">{text2}</span>
+        <span className="text-blue-900">{text2}</span>
         <div className="h-1 w-0 bg-blue-500 mt-2 transition-all duration-500 group-hover:w-full mx-auto rounded-full"></div>
       </h2>
 

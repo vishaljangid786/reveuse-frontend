@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Heading from "./Heading";
-import { motion } from "framer-motion";
-import axios from "axios";
 import { backendurl } from "../App";
 import Loader from "./Loader";
 import { Link } from "react-router-dom";
@@ -17,9 +15,14 @@ const CompaniesOverview = () => {
   const fetchServices = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${backendurl}/api/services`);
+      const res = await fetch(`${backendurl}/api/services`);
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      const data = await res.json();
+
       // Reverse the array to get descending order and take the first 6 items
-      const latestSix = res.data.slice().reverse().slice(0, 6);
+      const latestSix = data.slice().reverse().slice(0, 6);
       setServices(latestSix);
     } catch (err) {
       console.error("Failed to fetch:", err);
@@ -51,13 +54,9 @@ const CompaniesOverview = () => {
 
       <div className="max-w-6xl mx-auto px-4 py-12 mb-10 grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {services.map((service, index) => (
-          <motion.div
+          <div
             key={service._id}
-            className="rounded-xl hover:scale-105 cursor-pointer overflow-hidden shadow-md hover:shadow-lg transition duration-300"
-            whileHover={{ scale: 1.05 }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}>
+            className="rounded-xl hover:scale-105 cursor-pointer overflow-hidden shadow-md hover:shadow-lg transition duration-300">
             <Link to="/services">
               <img
                 loading="lazy"
@@ -66,7 +65,7 @@ const CompaniesOverview = () => {
                 className="h-64 w-full object-cover"
               />
             </Link>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>

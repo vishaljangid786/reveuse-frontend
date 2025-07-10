@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -6,17 +6,36 @@ import "swiper/css/navigation";
 import { features } from "../assets/assets";
 
 const FeaturesSlider = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef(null);
+
+  // Intersection Observer to detect if component is in viewport
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => {
+      if (containerRef.current) observer.unobserve(containerRef.current);
+    };
+  }, []);
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
+    <div ref={containerRef} className="max-w-7xl mx-auto px-4 py-10">
       <Swiper
         modules={[Autoplay, Navigation]}
         spaceBetween={20}
         navigation
         loop
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
+        autoplay={
+          isVisible
+            ? {
+                delay: 2500,
+                disableOnInteraction: false,
+              }
+            : false
+        }
         breakpoints={{
           0: { slidesPerView: 1 }, // mobile
           640: { slidesPerView: 1 }, // small screens

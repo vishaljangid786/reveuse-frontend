@@ -1,36 +1,19 @@
 import React, { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import HomeContact from "../components/HomeContact";
 import Heading from "../components/Heading";
-import Seo from "../components/Seo";
 import MeetTeam from "../components/MeetTeam";
 
 const Aboutus = () => {
-  useEffect(() => {
-    AOS.init({ duration: 1000 });
-  }, []);
-
   return (
     <>
-      <Seo
-        title="About Reveuse Solutions – Our Story & Vision"
-        description="Discover Reveuse Solutions' mission and vision. Meet our leadership and learn how we're driving transformation in digital services."
-        keywords="Reveuse, software solutions, digital services, company mission, company vision"
-        url="https://www.thereveuse.com/about"
-        image="https://www.thereveuse.com/assets/about-banner.jpg"
-      />
-
       <div className="bg-gray-50 mulish min-h-screen px-6 py-12 md:px-20 lg:px-32 font-sans">
         {/* Page Heading */}
-        <div className="text-center mb-16" data-aos="fade-down">
+        <div className="text-center mb-16">
           <Heading text1="The Story" text2="of Reveuse" />
         </div>
 
         {/* Mission Statement */}
-        <div
-          className="bg-white shadow-xl rounded-2xl p-8 mb-16 transition hover:shadow-2xl"
-          data-aos="fade-up">
+        <div className="bg-white shadow-xl rounded-2xl p-8 mb-16 transition hover:shadow-2xl">
           <h2 className="text-2xl font-semibold text-blue-600 mb-4">
             Our Mission
           </h2>
@@ -44,7 +27,7 @@ const Aboutus = () => {
         </div>
 
         {/* Banner Image */}
-        <div className="mb-16" data-aos="zoom-in">
+        <div className="mb-16">
           <img
             loading="lazy"
             src={
@@ -59,9 +42,7 @@ const Aboutus = () => {
         </div>
 
         {/* Vision Statement */}
-        <div
-          className="bg-white shadow-xl rounded-2xl p-8 mb-16 transition hover:shadow-2xl"
-          data-aos="fade-up">
+        <div className="bg-white shadow-xl rounded-2xl p-8 mb-16 transition hover:shadow-2xl">
           <h2 className="text-2xl font-semibold text-blue-600 mb-4">
             Our Vision
           </h2>
@@ -76,9 +57,7 @@ const Aboutus = () => {
         </div>
 
         {/* Inspirational Quote */}
-        <div
-          className="bg-blue-50 rounded-xl p-6 my-12 text-center shadow-md"
-          data-aos="fade-in">
+        <div className="bg-blue-50 rounded-xl p-6 my-12 text-center shadow-md">
           <p className="text-xl italic text-blue-800">
             "Excellence is not an act, but a habit. At Reveuse, we live by it."
           </p>
@@ -89,7 +68,7 @@ const Aboutus = () => {
       </div>
 
       {/* Contact CTA */}
-      <div data-aos="fade-up" className="mt-16">
+      <div className="mt-16">
         <HomeContact />
       </div>
     </>

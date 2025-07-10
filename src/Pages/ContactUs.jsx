@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import Seo from "../components/Seo";
 
 const ContactUs = () => {
   const form = useRef();
@@ -39,13 +38,6 @@ const ContactUs = () => {
         backgroundImage: `url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80')`,
       }}
     >
-      <Seo
-        title="Contact Reveuse Solutions | Let's Build Something Great"
-        description="Reach out to Reveuse Solutions for business inquiries, partnerships, or questions."
-        keywords="contact Reveuse, software solutions, custom IT, business inquiry"
-        url="https://www.thereveuse.com/contact"
-        image="https://www.thereveuse.com/assets/contact.jpg"
-      />
 
       <div className="bg-white/70 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-300 w-full max-w-6xl flex flex-col md:flex-row overflow-hidden">
         {/* Left: Image + Info */}

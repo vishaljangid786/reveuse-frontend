@@ -19,7 +19,6 @@ const HomeContact = () => {
       )
       .then(
         (result) => {
-          console.log(result.text);
           form.current.reset();
           setSubmitted(true);
           setLoading(false);

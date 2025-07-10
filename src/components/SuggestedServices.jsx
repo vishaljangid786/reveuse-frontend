@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Heading from "./Heading";
-import axios from "axios";
 import { backendurl } from "../App";
 import { Link } from "react-router-dom";
 
@@ -10,12 +9,16 @@ const SuggestedServices = ({ id }) => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const res = await axios.get(`${backendurl}/api/services`);
+        const res = await fetch(`${backendurl}/api/services`);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const data = await res.json();
         // Filter out the current service using the id prop
-        const filtered = res.data.filter((service) => service._id !== id);
+        const filtered = data.filter((service) => service._id !== id);
         setServices(filtered.slice(0, 10)); // Suggested limit
       } catch (err) {
-        console.error("Error fetching services");
+        console.error("Error fetching services:", err);
       }
     };
 

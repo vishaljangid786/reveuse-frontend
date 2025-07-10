@@ -1,32 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import ImageSlider from "../components/ImageSlider";
 import HomeAbout from "../components/HomeAbout";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import FAQ from "../components/FAQ";
-import CompaniesOverview from "../components/CompaniesOverview";
-import BlogSlider from "../components/BlogSlider";
-import HomeContact from "../components/HomeContact.jsx";
 import ServicesList from "./ServicesList.jsx";
-import Seo from "../components/Seo.jsx";
 import Heading from "../components/Heading.jsx";
-import ServicePortfolio from "../components/ServicePortfolio.jsx";
-import TabSlider from "../components/TabSlider.jsx";
+import LazyLoad from "../components/LazyLoad";
+
+// Lazy load heavy below-the-fold components
+const CompaniesOverview = lazy(() => import("../components/CompaniesOverview"));
+const TabSlider = lazy(() => import("../components/TabSlider.jsx"));
+const ServicePortfolio = lazy(() =>
+  import("../components/ServicePortfolio.jsx")
+);
+const BlogSlider = lazy(() => import("../components/BlogSlider"));
 
 const Home = () => {
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
+
   return (
     <div>
-      <Seo
-        title="Reveuse Solutions – Innovative IT Services & Blogs"
-        description="Explore web solutions, services, and tech blogs with Reveuse Solutions – your digital growth partner."
-        keywords="Reveuse Solutions, IT services, blog, web development, app development, software company"
-        url="https://www.thereveuse.com"
-        image="https://www.thereveuse.com/assets/banner.jpg" // Update this to actual image
-      />
-      
       <div data-aos="zoom-in">
         <ImageSlider />
       </div>
@@ -39,19 +34,32 @@ const Home = () => {
         <HomeAbout />
       </div>
       <div className="mt-16" data-aos="fade-up">
-        <CompaniesOverview />
+        <LazyLoad placeholderHeight="400px">
+          <Suspense fallback={<div>Loading...</div>}>
+            <CompaniesOverview />
+          </Suspense>
+        </LazyLoad>
       </div>
       <div className="mt-16" data-aos="fade-up">
-        <TabSlider />
+        <LazyLoad placeholderHeight="400px">
+          <Suspense fallback={<div>Loading...</div>}>
+            <TabSlider />
+          </Suspense>
+        </LazyLoad>
       </div>
       <div className="mt-16" data-aos="zoom-in">
-        <ServicePortfolio />
+        <LazyLoad placeholderHeight="400px">
+          <Suspense fallback={<div>Loading...</div>}>
+            <ServicePortfolio />
+          </Suspense>
+        </LazyLoad>
       </div>
       <div className="mt-16" data-aos="fade-up">
-        <BlogSlider />
-      </div>
-      <div className="mt-16" data-aos="zoom-in">
-        <FAQ />
+        <LazyLoad placeholderHeight="400px">
+          <Suspense fallback={<div>Loading...</div>}>
+            <BlogSlider />
+          </Suspense>
+        </LazyLoad>
       </div>
     </div>
   );

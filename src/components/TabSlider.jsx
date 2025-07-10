@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Heading from "./Heading";
 
@@ -39,20 +39,34 @@ const tabs = [
 
 const TabSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef(null);
 
-  // Auto switch tab every 5 seconds
+  // Intersection Observer to detect if component is in viewport
   useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => {
+      if (containerRef.current) observer.unobserve(containerRef.current);
+    };
+  }, []);
+
+  // Auto switch tab every 5 seconds, only if visible
+  useEffect(() => {
+    if (!isVisible) return;
     const interval = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % tabs.length);
     }, 5000);
-
-    return () => clearInterval(interval); // cleanup
-  }, []);
+    return () => clearInterval(interval);
+  }, [isVisible]);
 
   const selected = tabs[activeIndex];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-16">
+    <div ref={containerRef} className="max-w-6xl mx-auto px-4 py-16">
       <Heading text1={"Why"} text2={"Choose Us ?"} />
 
       {/* Tabs */}
@@ -65,8 +79,7 @@ const TabSlider = () => {
               activeIndex === index
                 ? "text-white"
                 : "text-gray-700 hover:text-blue-600"
-            }`}
-          >
+            }`}>
             {tab.title}
             {activeIndex === index && (
               <motion.div
@@ -81,32 +94,33 @@ const TabSlider = () => {
 
       {/* Tab Content */}
       <div className="relative min-h-[300px]">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={selected.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white/90 backdrop-blur-sm p-6 md:p-10 rounded-2xl shadow-xl border border-slate-200"
-          >
-            <motion.img
-              src={selected.image}
-              alt={selected.title}
-              className="w-full h-64 md:h-80 object-cover rounded-xl shadow-md"
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 200 }}
-            />
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-blue-600 mb-3">
-                {selected.title}
-              </h2>
-              <p className="text-gray-700 text-base leading-relaxed">
-                {selected.description}
-              </p>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+        {isVisible && (
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selected.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white/90 backdrop-blur-sm p-6 md:p-10 rounded-2xl shadow-xl border border-slate-200">
+              <motion.img
+                src={selected.image}
+                alt={selected.title}
+                className="w-full h-64 md:h-80 object-cover rounded-xl shadow-md"
+                whileHover={{ scale: 1.03 }}
+                transition={{ type: "spring", stiffness: 200 }}
+              />
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-blue-600 mb-3">
+                  {selected.title}
+                </h2>
+                <p className="text-gray-700 text-base leading-relaxed">
+                  {selected.description}
+                </p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        )}
       </div>
     </div>
   );

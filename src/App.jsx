@@ -1,39 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer.jsx";
-import Home from "./Pages/Home.jsx";
-import Aboutus from "./Pages/Aboutus.jsx";
-import Services from "./Pages/Services.jsx";
-import Blog from "./Pages/Blog.jsx";
-import ContactUs from "./Pages/ContactUs.jsx";
-import BlogForm from "./Pages/admin/BlogForm.jsx";
-import Login from "./Pages/Login.jsx";
-import BlogDetails from "./Pages/BlogDetails.jsx";
-import AllServices from "./Pages/admin/AllServices.jsx";
-import AdminLayout from "./Pages/AdminLayout.jsx";
-import AllBlog from "./Pages/admin/AllBlog.jsx";
-import NewService from "./Pages/admin/NewService.jsx";
-import ServiceDetails from "./Pages/ServiceDetails.jsx";
-import { HelmetProvider } from "react-helmet-async";
-import FAQ from "./components/FAQ.jsx";
-import Lenis from 'lenis'
+import Loader from "./components/Loader.jsx";
+const Home = lazy(() => import("./Pages/Home.jsx"));
+const Aboutus = lazy(() => import("./Pages/Aboutus.jsx"));
+const Services = lazy(() => import("./Pages/Services.jsx"));
+const Blog = lazy(() => import("./Pages/Blog.jsx"));
+const ContactUs = lazy(() => import("./Pages/ContactUs.jsx"));
+const BlogForm = lazy(() => import("./Pages/admin/BlogForm.jsx"));
+const Login = lazy(() => import("./Pages/Login.jsx"));
+const BlogDetails = lazy(() => import("./Pages/BlogDetails.jsx"));
+const AllServices = lazy(() => import("./Pages/admin/AllServices.jsx"));
+const AdminLayout = lazy(() => import("./Pages/AdminLayout.jsx"));
+const AllBlog = lazy(() => import("./Pages/admin/AllBlog.jsx"));
+const NewService = lazy(() => import("./Pages/admin/NewService.jsx"));
+const ServiceDetails = lazy(() => import("./Pages/ServiceDetails.jsx"));
+const FAQ = lazy(() => import("./components/FAQ.jsx"));
+const CompaniesOverview = lazy(() => import("./components/CompaniesOverview"));
+const ServicePortfolio = lazy(() => import("./components/ServicePortfolio"));
+const BlogSlider = lazy(() => import("./components/BlogSlider"));
 
 // export const backendurl = "http://localhost:5000";
 export const backendurl = "https://thereveuse.com";
 
 const App = () => {
-
-  const lenis = new Lenis();
-
-  // Use requestAnimationFrame to continuously update the scroll
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-
-  requestAnimationFrame(raf);
-
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -51,9 +42,9 @@ const App = () => {
   };
 
   return (
-    <HelmetProvider>
-      <BrowserRouter>
-        <Navbar />
+    <BrowserRouter>
+      <Navbar />
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<Aboutus />} />
@@ -72,17 +63,17 @@ const App = () => {
             <Route path="allservices" element={<AllServices />} />
           </Route>
         </Routes>
-        {isVisible && (
-          <button
-            onClick={handleClick}
-            className="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg transform transition-all duration-300 ease-in-out hover:scale-110 hover:bg-blue-700 hover:rotate-45">
-            <i className="fas fa-arrow-up text-2xl"></i>
-          </button>
-        )}
+      </Suspense>
+      {isVisible && (
+        <button
+          onClick={handleClick}
+          className="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg transform transition-all duration-300 ease-in-out hover:scale-110 hover:bg-blue-700 hover:rotate-45">
+          <i className="fas fa-arrow-up text-2xl"></i>
+        </button>
+      )}
 
-        <Footer />
-      </BrowserRouter>
-    </HelmetProvider>
+      <Footer />
+    </BrowserRouter>
   );
 };
 

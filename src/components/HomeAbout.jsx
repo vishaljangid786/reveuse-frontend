@@ -7,13 +7,13 @@ const HomeAbout = () => {
     <div
       className="relative w-full min-h-[100vh] bg-cover bg-center bg-fixed flex items-center justify-center text-white px-4 py-10 md:py-20"
       style={{
-        backgroundImage: `url(${"https://res.cloudinary.com/djvxynk2f/image/upload/v1748309284/homeabout_mnigmi.webp"})`,
+        backgroundImage: `url(${"https://res.cloudinary.com/djvxynk2f/image/upload/v1749195560/people-having-debate-while-looking-computer-min_hydwaq.jpg"})`,
       }}>
       {/* Overlay */}
       <div className="absolute inset-0 bg-black opacity-60 z-0" />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-4xl text-center">
+      <div className="relative z-10 w-full max-w-4xl text-center mt-20">
         <Heading text1="About" text2="Us" />
 
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 px-2">

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { backendurl } from "../App";
 import { useNavigate } from "react-router-dom";
 
@@ -14,23 +13,28 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `${backendurl}/api/users/login`,
-        {
-          email,
-          password,
-        }
-      );
-      setToken(response.data.token);
+      const response = await fetch(`${backendurl}/api/users/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Login failed");
+      }
+
+      const data = await response.json();
+      setToken(data.token);
       setMessage("Login successful!");
-      navigate('/admin/createblog')
+      localStorage.setItem("token", data.token);
+      navigate("/admin/createblog");
       setEmail("");
       setPassword("");
-      localStorage.setItem("token", response.data.token); // Redirect to profile after 2 seconds
     } catch (error) {
-      setMessage(
-        error.response ? error.response.data.message : "Something went wrong!"
-      );
+      setMessage(error.message || "Something went wrong!");
     }
   };
 

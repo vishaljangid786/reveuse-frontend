@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { services } from "../assets/assets";
-import { div } from "framer-motion/client";
 import Heading from "./Heading";
 
 const HomeServices = () => {

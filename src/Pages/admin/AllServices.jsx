@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { backendurl } from "../../App";
 import Heading from "../../components/Heading";
 import Loader from "../../components/Loader";
@@ -23,10 +22,14 @@ const AllServices = () => {
 
   const fetchServices = async () => {
     try {
-      const res = await axios.get(`${backendurl}/api/services`);
-      setServices(res.data);
+      const res = await fetch(`${backendurl}/api/services`);
+      if (!res.ok) {
+        throw new Error("Failed to fetch services");
+      }
+      const data = await res.json();
+      setServices(data);
     } catch (err) {
-      setError(err.response?.data?.error || "Failed to fetch services");
+      setError(err.message || "Failed to fetch services");
     } finally {
       setLoading(false);
     }
@@ -36,10 +39,15 @@ const AllServices = () => {
     if (!window.confirm("Are you sure you want to delete this service?"))
       return;
     try {
-      await axios.delete(`${backendurl}/api/services/${id}`);
+      const res = await fetch(`${backendurl}/api/services/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) {
+        throw new Error("Failed to delete service");
+      }
       setServices((prev) => prev.filter((s) => s._id !== id));
     } catch (err) {
-      alert("Failed to delete service.");
+      alert(err.message || "Failed to delete service.");
     }
   };
 
@@ -80,16 +88,23 @@ const AllServices = () => {
 
     try {
       setUpdating(true);
-      const res = await axios.put(
+      const res = await fetch(
         `${backendurl}/api/services/${editingService._id}`,
-        data
+        {
+          method: "PUT",
+          body: data,
+        }
       );
+      if (!res.ok) {
+        throw new Error("Failed to update service");
+      }
+      const updatedService = await res.json();
       setServices((prev) =>
-        prev.map((s) => (s._id === res.data._id ? res.data : s))
+        prev.map((s) => (s._id === updatedService._id ? updatedService : s))
       );
       setEditingService(null);
     } catch (err) {
-      alert("Failed to update service.");
+      alert(err.message || "Failed to update service.");
     } finally {
       setUpdating(false);
     }
